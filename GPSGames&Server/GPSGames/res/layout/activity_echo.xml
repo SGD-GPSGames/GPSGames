@@ -1,0 +1,36 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity" >
+
+    <EditText
+        android:id="@+id/echoInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="117dp"
+        android:ems="10"
+        android:hint="Insert Something" />
+
+    <Button
+        android:id="@+id/echoSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/echoInput"
+        android:layout_alignRight="@+id/echoInput"
+        android:layout_centerVertical="true"
+        android:text="Submit" />
+
+    <TextView
+        android:id="@+id/echoResponse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/echoSubmit"
+        android:layout_alignRight="@+id/echoSubmit"
+        android:layout_below="@+id/echoSubmit"
+        android:layout_marginTop="48dp"
+        android:text="Echoed Text" />
+
+</RelativeLayout>
