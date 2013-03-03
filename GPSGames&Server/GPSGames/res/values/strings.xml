@@ -4,5 +4,8 @@
     <string name="app_name">GPS Games</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
+    <string name="title_activity_menu">MenuActivity</string>
+    <string name="create_game">Create Game</string>
+    <string name="join_game">Join Game</string>
 
 </resources>

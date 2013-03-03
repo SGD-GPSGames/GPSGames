@@ -1,16 +1,13 @@
 package edu.virginia.cs.sgd.gpsgames;
 
-import java.io.IOException;
-import java.net.Socket;
-import java.net.UnknownHostException;
-
+import edu.virginia.cs.sgd.gpsgames.util.Constants;
 import android.app.Activity;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -20,10 +17,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import edu.virginia.cs.sgd.gpsgames.connection.StringSocketHandler;
 
-
-public class LoginActivity extends Activity {
+public class LoginActivity extends FragmentActivity {
 
 	private final static String TAG = "GPSGamesLOGIN";
 
@@ -31,25 +26,15 @@ public class LoginActivity extends Activity {
 	private ServiceConnection mConnection;
 	private boolean mIsBound = false;
 	
+	private EditText usernameText;
+	private EditText passwordText;
+	private Button submitButton;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Log.d(TAG,"started");
-		setContentView(R.layout.activity_echo);
-
-		//String ip = "137.54.20.116";
-		//int port = 7777;
-
-		final EditText input = (EditText) findViewById(R.id.echoInput);
-		final TextView response = (TextView) findViewById(R.id.echoResponse);
-		final Button submitButton = (Button) findViewById(R.id.echoSubmit);
-
-		//Log.d(TAG,"attempted to create socket");
-		
-
-		//final StringSocketHandler socket = new StringSocketHandler(
-		//		new Socket(ip, port));
-		//Log.d(TAG,"attempted to connect to socket");
+		setContentView(R.layout.activity_login);
 		
 		mConnection = new ServiceConnection() {
 		    public void onServiceConnected(ComponentName className, IBinder service) {
@@ -81,18 +66,31 @@ public class LoginActivity extends Activity {
 		};
 
 		doBindService();
-//		submitButton.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				String textString = input.getText().toString();
-//				if (socket.write(textString))
-//					Log.d(TAG,"message sent");
-//				else
-//					Log.d(TAG,"message failed");
-//			}
-//		});
 
+		
+		//Set up the UI
+	
+		usernameText = (EditText)findViewById(R.id.loginUsername);
+		passwordText = (EditText)findViewById(R.id.loginPassword);
+		submitButton = (Button)findViewById(R.id.loginSubmit);
+		
+		submitButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				moveToMenuActivity();
+				
+			}
+		});
+		
+
+	}
+	
+	public void moveToMenuActivity() {
+		Intent mainActivity = new Intent(this, MenuActivity.class);
+		String username = usernameText.getText().toString();
+		mainActivity.putExtra(Constants.USERNAME, username);
+		startActivity(mainActivity);
 	}
 
 
