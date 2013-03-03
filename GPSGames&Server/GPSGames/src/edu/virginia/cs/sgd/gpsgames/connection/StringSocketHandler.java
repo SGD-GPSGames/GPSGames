@@ -1,4 +1,4 @@
-package edu.virginia.cs.sgd.gpsgames.socks;
+package edu.virginia.cs.sgd.gpsgames.connection;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,6 +7,8 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+
+import android.util.Log;
 
 /**
  * StringSocketHandler creates an easy to read from and write to
@@ -24,6 +26,8 @@ public class StringSocketHandler {
 	BlockingQueue<String> incoming = new LinkedBlockingQueue<String>();
 	private Thread reader,writer;
 	
+	private static final String TAG = "GPSSocketHandler";
+	
 	/**
 	 * Creates a new SocketHandler
 	 * @param s Socket to handle
@@ -35,12 +39,13 @@ public class StringSocketHandler {
 			         true);
 		in = new BufferedReader(new InputStreamReader(
                  socket.getInputStream())); 
-		
+		Log.d(TAG,"Created reader/writer");
 		connected = true;
 		reader = new Thread(new SocketReader(this));
 		writer = new Thread(new SocketWriter(this));
 		reader.start();
 		writer.start();
+		Log.d(TAG,"Created reader/writer threads");
 	}
 	
 	/**
