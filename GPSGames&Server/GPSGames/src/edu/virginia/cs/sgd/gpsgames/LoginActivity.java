@@ -26,7 +26,7 @@ public class LoginActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		try {
 			super.onCreate(savedInstanceState);
-			setContentView(R.layout.activity_echo);
+			setContentView(R.layout.activity_login);
 
 			String ip = "137.54.21.105";
 			int port = 7777;
