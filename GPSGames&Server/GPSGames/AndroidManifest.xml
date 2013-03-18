@@ -8,10 +8,22 @@
         android:minSdkVersion="10"
         android:targetSdkVersion="10" />
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <permission
+        android:name="com.example.maptest.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.example.maptest.permission.MAPS_RECEIVE" />
 
     <application
         android:allowBackup="true"
@@ -34,6 +46,13 @@
             android:name="edu.virginia.cs.sgd.gpsgames.MenuActivity"
             android:label="@string/title_activity_menu" >
         </activity>
+        <activity
+            android:name="edu.virginia.cs.sgd.gpsgames.MapActivity"
+            android:label="@string/title_activity_map" >
+        </activity>
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyBQ_4RAVWDKth7U8kHM_KOAQMr9W-sbqJY" />
     </application>
 
 </manifest>

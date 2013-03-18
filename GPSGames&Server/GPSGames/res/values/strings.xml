@@ -7,5 +7,7 @@
     <string name="title_activity_menu">MenuActivity</string>
     <string name="create_game">Create Game</string>
     <string name="join_game">Join Game</string>
+    <string name="title_activity_map">MapActivity</string>
+    <string name="action_settings">Settings</string>
 
 </resources>
