@@ -24,7 +24,7 @@ public class ServerConnectionService extends Service {
     private static final int NOTIFICATION_ID = 235789;
     private static final int PROCESS_ID = 1234; 
     
-    private static final String IP_ADDRESS = "192.168.1.36";
+    private static final String IP_ADDRESS = "172.25.99.163";
 	private static final int PORT = 7777;
 
     private Thread t;
