@@ -116,4 +116,8 @@ public class ServerConnectionService extends Service {
     public void stop(){
     	stopSelf();
     }
+    
+    public Connection getConnection(){
+    	return connection;
+    }
 }
