@@ -3,6 +3,9 @@ package edu.virginia.cs.sgd.gpsgames.connection;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import android.util.Log;
 
@@ -13,6 +16,9 @@ public class Connection implements Runnable{
 	private boolean open;
 	private String ip;
 	private int port;
+	BlockingQueue<String> outgoing = new LinkedBlockingQueue<String>();
+	BlockingQueue<String> incoming = new LinkedBlockingQueue<String>();
+	
 	public Connection(String ip, int port){
 		this.ip = ip;
 		this.port = port;
@@ -25,12 +31,21 @@ public class Connection implements Runnable{
 		while (open && !sock.isClosed() && !sock.isConnected())
 		{
 			//wait around and let the socket handler do its job
-//			try {
-//				//Thread.sleep(100);
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
+			String message = outgoing.poll();
+			while (message != null){
+				sock.write(message);
+				message = outgoing.poll();
+			}
+			if (sock.getIncomingMessages() != null)
+			{
+				incoming.addAll(sock.getIncomingMessages());
+			}
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		Log.d(TAG,"Closing");
 		open = false;
@@ -77,5 +92,22 @@ public class Connection implements Runnable{
 			Log.d(TAG,e1.getMessage());
 		}
 	}
+	
+	public void send(String message){
+		outgoing.add(message);
+	}
+	
+	/**
+	 * Gets all of the current messages and deletes them from the connection
+	 * @return
+	 */
+	public ArrayList<String> retrieve(){
+		ArrayList<String> messages = new ArrayList<String>();
+		messages.addAll(incoming);
+		incoming.clear();
+		return messages;
+	}
+	
+	
 
 }
