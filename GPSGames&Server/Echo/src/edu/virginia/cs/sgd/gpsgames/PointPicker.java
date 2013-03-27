@@ -17,7 +17,7 @@ public class PointPicker {
 	//The color of the Google Map which the program accepts
 	private static final int ACCEPT = -65794;
 
-	public ArrayList<LatLng> pickPointsInRadius(LatLng center, double minRadius, double radius, int numPoints) {
+	public ArrayList<LatLng> pickPointsInRadius(LatLng center, double minRadius, double radius, int numPoints, boolean water, boolean highway, boolean arterial, boolean local, boolean indoors) {
 
 		ArrayList<LatLng> points = new ArrayList<LatLng>();
 
@@ -31,7 +31,7 @@ public class PointPicker {
 
 			LatLng point = new LatLng(center.latitude + rad * Math.cos(angle), center.longitude + rad * Math.sin(angle));
 
-			if(isValid(point)) {
+			if(isValid(point, water, highway, arterial, local, indoors)) {
 
 				points.add(point);
 				if(points.size() == numPoints) {
@@ -46,7 +46,7 @@ public class PointPicker {
 		return null;
 	}
 
-	public ArrayList<LatLng> pickPointInBounds(ArrayList<LatLng> bounds, int numPoints) {
+	public ArrayList<LatLng> pickPointInBounds(ArrayList<LatLng> bounds, int numPoints, boolean water, boolean highway, boolean arterial, boolean local, boolean indoors) {
 
 		ArrayList<LatLng> points = new ArrayList<LatLng>();
 
@@ -71,7 +71,7 @@ public class PointPicker {
 				if(r <= currentNum) {
 					LatLng point = t.getPoint(rand.nextDouble(), rand.nextDouble());
 
-					if(isValid(point)) {
+					if(isValid(point, water, highway, arterial, local, indoors)) {
 
 						points.add(point);
 						if(points.size() == numPoints) {
@@ -92,14 +92,14 @@ public class PointPicker {
 		return null;
 	}
 
-	public boolean isValid(LatLng point) {
+	public boolean isValid(LatLng point, boolean water, boolean highway, boolean arterial, boolean local, boolean indoors) {
 
 		BufferedImage b = null;
 
 		try {
 
 			URL loc = new URL(getMapUrl(point.latitude,
-					point.longitude, 10, false, false, false, false));
+					point.longitude, 10, water, highway, arterial, local, indoors));
 			InputStream in = loc.openStream();
 			b = ImageIO.read(in);
 
@@ -152,7 +152,7 @@ public class PointPicker {
 		return triangles;
 	}
 
-	private String getMapUrl(double lat, double lon, int radius, boolean water, boolean highway, boolean arterial, boolean local) {
+	private String getMapUrl(double lat, double lon, int radius, boolean water, boolean highway, boolean arterial, boolean local, boolean indoors) {
 
 		final String coordPair = lat + "," + lon;
 		return "http://maps.googleapis.com/maps/api/staticmap?" + "&zoom=20"
@@ -165,7 +165,7 @@ public class PointPicker {
 		+ "&style=feature:road.local|color:" + (local ? "0xffffff" : "0x000000")
 		+ "&style=feature:poi|color:0xffffff"
 		+ "&style=feature:landscape.natural|color:0xffffff"
-		+ "&style=feature:landscape.man_made|color:0x000000";
+		+ "&style=feature:landscape.man_made|color:" + (indoors ? "0xffffff" : "0x000000");
 	}
 
 }
