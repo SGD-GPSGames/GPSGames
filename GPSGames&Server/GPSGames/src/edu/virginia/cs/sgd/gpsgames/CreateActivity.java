@@ -12,30 +12,35 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class MenuActivity extends FragmentActivity{
+public class CreateActivity extends FragmentActivity{
 
-    TextView welcome;
-    Button create;
-    Button join;
-    ListView gameList;
+    TextView instructions;
+    Button race;
+    Button treasure;
 	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_menu);
+		setContentView(R.layout.activity_create);
 		
 		setUpUI();
 		
-		welcome.setText("Welcome " + getIntent().getStringExtra(Constants.USERNAME) + "!");
-		
-		populateGameList();
-		
-		create.setOnClickListener(new OnClickListener() {
+		instructions.setText("Choose Your Game Type");
+			
+		race.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				moveToCreateActivity();	
+				moveToRaceSetup();	
+			}
+		});
+		
+		treasure.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				moveToTreasureSetup();	
 			}
 		});
 		
@@ -44,25 +49,23 @@ public class MenuActivity extends FragmentActivity{
 
 	
 	public void setUpUI(){
-		welcome = (TextView) findViewById(R.id.menu_welcome);
-		create = (Button) findViewById(R.id.menu_create);
-		join = (Button) findViewById(R.id.menu_join);
-		gameList = (ListView)findViewById(R.id.menu_gameList);	
+		instructions = (TextView) findViewById(R.id.create_instructions);
+		race = (Button) findViewById(R.id.button_create_race);
+		treasure = (Button) findViewById(R.id.button_create_treasure);
 	}
 	
-	public void moveToCreateActivity() {
+	public void moveToRaceSetup() {
 		//REPLACE MenuActivity.clss BELOW WITH CLASS YOU WANT TO GO TO
-		Intent mainActivity = new Intent(this, CreateActivity.class);
+		Intent mainActivity = new Intent(this, RaceSetupActivity.class);
 		startActivity(mainActivity);
 	}
 	
-	public void populateGameList() {
-		String[]  games = { "Game 1", "Game 2", "Game 3", "Game 4", "Game 5", "Game 6", "Game 7", "Game 8"};
-		ArrayAdapter adapter = new ArrayAdapter<String>(this, 
-		        android.R.layout.simple_list_item_1, games);
-		
-		gameList.setAdapter(adapter);
+	public void moveToTreasureSetup() {
+		//REPLACE MenuActivity.clss BELOW WITH CLASS YOU WANT TO GO TO
+		Intent mainActivity = new Intent(this, TreasureSetupActivity.class);
+		startActivity(mainActivity);
 	}
+	
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
