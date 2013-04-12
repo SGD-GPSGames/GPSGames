@@ -46,12 +46,16 @@ public class SelectPointActivity extends MapActivity implements PointRequestor {
 	}
 	
 	public void moveToRaceSetupActivity() {
+		
 		//REPLACE MenuActivity.clss BELOW WITH CLASS YOU WANT TO GO TO
 		Intent mainActivity = new Intent(this, RaceSetupActivity.class);
 		
 		mainActivity.putExtra("Name", name);
 		double[] pointArr = {point.latitude, point.longitude};
 		mainActivity.putExtra("Point", pointArr);
+		
+		map.clear();
+		point = null;
 		
 		startActivity(mainActivity);
 	}

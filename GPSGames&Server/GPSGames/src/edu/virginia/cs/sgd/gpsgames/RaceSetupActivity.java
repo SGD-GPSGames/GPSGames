@@ -86,7 +86,8 @@ public class RaceSetupActivity extends Activity {
 	private void getPoints() {
 		Bundle ex = getIntent().getExtras();
 		
-		String name = ex.getString("Name");
+		
+		String name = (ex == null ? null : ex.getString("Name"));
 		
 		if(name == null) {
 			return;
