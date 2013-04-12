@@ -1,7 +1,5 @@
 package edu.virginia.cs.sgd.gpsgames;
 
-import edu.virginia.cs.sgd.gpsgames.util.Constants;
-import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
@@ -14,8 +12,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
+import edu.virginia.cs.sgd.gpsgames.util.Constants;
 
 
 public class LoginActivity extends FragmentActivity {

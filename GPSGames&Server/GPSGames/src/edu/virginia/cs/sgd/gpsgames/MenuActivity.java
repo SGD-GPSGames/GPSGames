@@ -42,7 +42,6 @@ public class MenuActivity extends FragmentActivity{
 		
 	}
 
-	
 	public void setUpUI(){
 		welcome = (TextView) findViewById(R.id.menu_welcome);
 		create = (Button) findViewById(R.id.menu_create);

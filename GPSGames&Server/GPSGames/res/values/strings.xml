@@ -14,5 +14,9 @@
     <string name="create_race">Race</string>
     <string name="title_activity_race_setup">RaceSetupActivity</string>
     <string name="title_activity_treasure_setup">TreasureSetupActivity</string>
+    <string name="select_point">Select Point</string>
+    <string name="title_activity_select_point">SelectPointActivity</string>
+    <string name="title_activity_game_map">GameMapActivity</string>
+    <string name="select_button">Pick It!</string>
 
 </resources>

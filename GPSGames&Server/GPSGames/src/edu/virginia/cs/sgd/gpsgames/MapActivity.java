@@ -1,14 +1,12 @@
 package edu.virginia.cs.sgd.gpsgames;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
-import android.location.Location;
 import android.os.Bundle;
 import android.view.Menu;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -16,15 +14,21 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapActivity extends Activity {
+/**
+ * Abstract superclass for all activities involving Google Maps
+ * 
+ * @author Jack
+ *
+ */
+public abstract class MapActivity extends Activity {
 
-	private MapView mapView;
-	private GoogleMap map;
+	protected MapView mapView;
+	protected GoogleMap map;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_map);
+		setContentView(getLayout());
 
 		mapView = (MapView) findViewById(R.id.map);
 
@@ -38,6 +42,18 @@ public class MapActivity extends Activity {
 		}
 
 		map = mapView.getMap();
+		
+		map.setOnMapClickListener(new OnMapClickListener() {
+
+			public void onMapClick(LatLng point) {
+				
+				onClick(point);
+				
+			}
+			
+		});
+		
+		setUpUI();
 	}
 
 	@Override
@@ -77,13 +93,7 @@ public class MapActivity extends Activity {
 		mapView.onSaveInstanceState(outState);
 	}
 
-	public LatLng getCurrentLocation() {
-		Location l = map.getMyLocation();
-		
-		return new LatLng(l.getLatitude(), l.getLongitude());
-	}
-	
-	private void addMarker(LatLng position, String title, float color) { 
+	protected void addMarker(LatLng position, String title, float color) { 
 		@SuppressWarnings("unused")
 		Marker marker = map.addMarker(new MarkerOptions()
 		.position(position)
@@ -91,16 +101,10 @@ public class MapActivity extends Activity {
 		.icon(BitmapDescriptorFactory.defaultMarker(color)));
 		
 	}
-
-	public void update(ArrayList<Point> points) {
-		
-		map.clear();
-		
-		for(Point p : points) {
-			addMarker(p.getPosition(), p.getTitle(), p.getColor());
-		}
-		
-	}
 	
+	public abstract int getLayout();
 	
+	public abstract void setUpUI();
+	
+	public abstract void onClick(LatLng point);
 }

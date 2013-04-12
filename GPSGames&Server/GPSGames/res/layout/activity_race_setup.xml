@@ -61,19 +61,19 @@
                 android:layout_height="wrap_content" />
 
             <Button
-                android:id="@+id/button1"
+                android:id="@+id/pick_start"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Pick Start Point" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/pick_end"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Pick End Point" />
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/create_game"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Create Game" />
