@@ -68,19 +68,24 @@ public class RaceSetupActivity extends Activity {
 		return true;
 	}
 	
-	public void moveToSelectActivity(String name) {
+	public void moveToSelectActivity(String name, LatLng startingPoint) {
 		//REPLACE MenuActivity.clss BELOW WITH CLASS YOU WANT TO GO TO
 		Intent mainActivity = new Intent(this, SelectPointActivity.class);
 		mainActivity.putExtra("Name", name);
+		
+		if(startingPoint != null) {
+			double[] pointArr = {startingPoint.latitude, startingPoint.longitude};
+			mainActivity.putExtra("Point", pointArr);
+		}
 		startActivity(mainActivity);
 	}
 	
 	public void pickStart() {
-		moveToSelectActivity("Start");
+		moveToSelectActivity("Start", start);
 	}
 
 	public void pickEnd() {
-		moveToSelectActivity("End");
+		moveToSelectActivity("End", end);
 	}
 
 	private void getPoints() {

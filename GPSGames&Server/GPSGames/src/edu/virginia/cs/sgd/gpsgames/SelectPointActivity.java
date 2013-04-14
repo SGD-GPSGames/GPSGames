@@ -36,6 +36,13 @@ public class SelectPointActivity extends MapActivity implements PointRequestor {
 		String ex = getIntent().getExtras().getString("Name");
 		
 		name = (ex == null ? "" : ex);
+		
+		double[] pointArr = getIntent().getExtras().getDoubleArray("Point");
+		if(point != null) {
+			LatLng point = new LatLng(pointArr[0], pointArr[1]);
+			this.point = point;
+			addMarker(point, "Current Point", BitmapDescriptorFactory.HUE_RED);
+		}
 	}
 
 	@Override
