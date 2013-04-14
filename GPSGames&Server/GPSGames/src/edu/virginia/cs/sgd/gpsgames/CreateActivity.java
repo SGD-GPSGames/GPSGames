@@ -1,15 +1,12 @@
 package edu.virginia.cs.sgd.gpsgames;
 
-import edu.virginia.cs.sgd.gpsgames.util.Constants;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
 public class CreateActivity extends FragmentActivity{

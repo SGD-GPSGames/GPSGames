@@ -3,7 +3,7 @@
     package="edu.virginia.cs.sgd.gpsgames"
     android:versionCode="1"
     android:versionName="1.0" >
-
+    
     <uses-sdk
         android:minSdkVersion="10"
         android:targetSdkVersion="10" />
@@ -54,6 +54,26 @@
             android:label="@string/title_activity_map"
             android:launchMode="singleInstance" >
         </activity>
+        <activity
+            android:name="edu.virginia.cs.sgd.gpsgames.RaceSetupActivity"
+            android:launchMode="singleInstance"
+            android:label="@string/title_activity_race_setup" >
+        </activity>
+        <activity
+            android:name="edu.virginia.cs.sgd.gpsgames.TreasureSetupActivity"
+            android:launchMode="singleInstance"
+            android:label="@string/title_activity_treasure_setup" >
+        </activity>
+        <activity
+            android:name="edu.virginia.cs.sgd.gpsgames.SelectPointActivity"
+            android:launchMode="singleInstance"
+            android:label="@string/title_activity_select_point" >
+        </activity>
+        <activity
+            android:name="edu.virginia.cs.sgd.gpsgames.GameMapActivity"
+            android:launchMode="singleInstance"
+            android:label="@string/title_activity_game_map" >
+        </activity>
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
@@ -65,17 +85,6 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.virginia.cs.sgd.gpsgames.MenuActivity" />
-        </activity>
-        <activity
-            android:name="edu.virginia.cs.sgd.gpsgames.RaceSetupActivity"
-            android:label="@string/title_activity_race_setup" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="edu.virginia.cs.sgd.gpsgames.CreateActivity" />
-        </activity>
-        <activity
-            android:name="edu.virginia.cs.sgd.gpsgames.TreasureSetupActivity"
-            android:label="@string/title_activity_treasure_setup" >
         </activity>
     </application>
 
