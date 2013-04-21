@@ -1,8 +1,6 @@
 package edu.virginia.cs.sgd.gpsgames;
 
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.TreeMap;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -12,7 +10,7 @@ import com.google.android.gms.maps.model.LatLng;
  * @author Jack
  *
  */
-public abstract class Game {
+public abstract class Game<P extends Player> {
 	
 	// Whether game is started
 	private boolean on;
@@ -20,8 +18,11 @@ public abstract class Game {
 	// The range of tolerance for collisions
 	private double tolerance;
 	
-	// The map of names to points
-	private Map<String, Point> points;
+	// List of players in game
+	private ArrayList<P> players;
+	
+	// Other points
+	private ArrayList<Point> otherPoints;
 
 	/**
 	 * Constructor. Sets the tolerance and instantiates map.
@@ -31,7 +32,7 @@ public abstract class Game {
 	public Game(double tolerance) {
 		this.on = false;
 		this.tolerance = tolerance;
-		this.points = new TreeMap<String, Point>();
+		this.players = new ArrayList<P>();
 	}
 	
 	public boolean isOn() {
@@ -42,25 +43,14 @@ public abstract class Game {
 		this.on = on;
 	}
 
-	/**
-	 * Puts a point in the map
-	 * 
-	 * @param p The point to insert
-	 */
-	public void putPoint(Point p) {
-		points.put(p.getTitle(), p);
+	public void addPlayer(P player) {
+		players.add(player);
+	}
+	
+	public void addPoint(Point p) {
+		otherPoints.add(p);
 	}
 
-	/**
-	 * Looks up a point in the map.
-	 * 
-	 * @param title The name of the point.
-	 * 
-	 * @return The point to get.
-	 */
-	public Point getPoint(String title) {
-		return points.get(title);
-	}
 	
 	/**
 	 * Returns the points in the map as a list
@@ -69,19 +59,11 @@ public abstract class Game {
 	 */
 	public ArrayList<Point> getPointList() {
 		ArrayList<Point> pointList = new ArrayList<Point>();
-		pointList.addAll(points.values());
+		for(P player : players) {
+			pointList.add(player.getPoint());
+		}
+		pointList.addAll(otherPoints);
 		return pointList;
-	}
-	
-	/**
-	 * Updates the position of a point
-	 * 
-	 * @param title The name of the point to change
-	 * 
-	 * @param newPos The new position
-	 */
-	public void updatePosition(String title, LatLng newPos) {
-		getPoint(title).setPosition(newPos);
 	}
 	
 	/**
@@ -101,46 +83,50 @@ public abstract class Game {
 	 * Checks all points for colliding points
 	 */
 	public void checkCollision() {
-		ArrayList<Point> pointList = getPointList();
 		
-		for(int i = 0; i < pointList.size(); i++) {
-			Point p1 = pointList.get(i);
+		for(int i = 0; i < players.size(); i++) {
+			P player = players.get(i);
 			
-			for(int j = i+1; j < pointList.size(); j++) {
-				Point p2 = pointList.get(j);
+			for(int j = i+1; j < players.size(); j++) {
+				P player2 = players.get(i);
 				
-				if(inRange(p1.getPosition(), p2.getPosition())) {
-					onCollision(p1, p2);
+				if(inRange(player.getPoint().getPosition(), player2.getPoint().getPosition())) {
+					playerCollision(player, player2);
 				}
 			}
+			
+			for(Point point : otherPoints) {
+
+				if(inRange(player.getPoint().getPosition(), point.getPosition())) {
+					onCollision(player, point);
+				}
+			}
+			
+		}
+	}
+	
+	public void postGame() {
+	
+		for(P player : players) {
+			player.updateMap(getPointList());
 		}
 	}
 
 	/**
-	 * Called for each client, updating their position and applying any powerups.
+	 * Called when two players are colliding.
 	 * 
-	 * @param name The name of the client's entity within the game.
-	 * 
-	 * @param newPos The new position for the client
-	 * 
-	 * @param p The powerup being applied, or null if no powerup is to be applied.
+	 * @param player The player
+	 * @param player2 The second player
 	 */
-	public void clientUpdate(String name, LatLng newPos, Powerup p) {
-		
-		updatePosition(name, newPos);
-		
-		if(p != null) {
-			applyPowerup(name, p);
-		}
-	}
+	public abstract void playerCollision(P player, P player2);
 	
 	/**
-	 * Called when two points are colliding.
+	 * Called when a player and another point are colliding.
 	 * 
-	 * @param p1 The first point
-	 * @param p2 The second point
+	 * @param player The player
+	 * @param point The second point
 	 */
-	public abstract void onCollision(Point p1, Point p2);
+	public abstract void onCollision(P player, Point point);
 	
 	/**
 	 * Called when a client uses a powerup.
@@ -149,6 +135,6 @@ public abstract class Game {
 	 * 
 	 * @param p The powerup being used.
 	 */
-	public abstract void applyPowerup(String player, Powerup p);
+	public abstract void applyPowerup(P player, Powerup p);
 	
 }

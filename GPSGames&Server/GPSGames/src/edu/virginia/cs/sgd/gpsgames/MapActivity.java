@@ -53,6 +53,7 @@ public abstract class MapActivity extends Activity {
 			
 		});
 		
+		map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 		setUpUI();
 	}
 
