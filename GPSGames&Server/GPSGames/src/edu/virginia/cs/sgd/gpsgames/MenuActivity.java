@@ -42,7 +42,6 @@ public class MenuActivity extends FragmentActivity{
 		
 	}
 
-	
 	public void setUpUI(){
 		welcome = (TextView) findViewById(R.id.menu_welcome);
 		create = (Button) findViewById(R.id.menu_create);
@@ -52,7 +51,7 @@ public class MenuActivity extends FragmentActivity{
 	
 	public void moveToCreateActivity() {
 		//REPLACE MenuActivity.clss BELOW WITH CLASS YOU WANT TO GO TO
-		Intent mainActivity = new Intent(this, MenuActivity.class);
+		Intent mainActivity = new Intent(this, CreateActivity.class);
 		startActivity(mainActivity);
 	}
 	

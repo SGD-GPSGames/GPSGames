@@ -9,5 +9,16 @@
     <string name="join_game">Join Game</string>
     <string name="title_activity_map">MapActivity</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_create">CreateActivity</string>
+    <string name="create_treasure">Treasure Hunt</string>
+    <string name="create_race">Race</string>
+    <string name="title_activity_race_setup">RaceSetupActivity</string>
+    <string name="title_activity_treasure_setup">TreasureSetupActivity</string>
+    <string name="select_point">Select Point</string>
+    <string name="title_activity_select_point">SelectPointActivity</string>
+    <string name="title_activity_select_area">SelectAreaActivity</string>
+    <string name="title_activity_game_map">GameMapActivity</string>
+    <string name="select_button">Pick It!</string>
+    <string name="clear_button">Clear Points</string>
 
 </resources>
