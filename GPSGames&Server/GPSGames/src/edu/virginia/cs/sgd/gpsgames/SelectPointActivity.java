@@ -1,6 +1,7 @@
 package edu.virginia.cs.sgd.gpsgames;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -32,13 +33,14 @@ public class SelectPointActivity extends MapActivity implements PointRequestor {
 			}
 			
 		});
+
+		Bundle ex = getIntent().getExtras();
+		String str = ex.getString("Name");
 		
-		String ex = getIntent().getExtras().getString("Name");
+		name = (str == null ? "" : str);
 		
-		name = (ex == null ? "" : ex);
-		
-		double[] pointArr = getIntent().getExtras().getDoubleArray("Point");
-		if(point != null) {
+		double[] pointArr = ex.getDoubleArray("Point");
+		if(point != null && pointArr != null) {
 			LatLng point = new LatLng(pointArr[0], pointArr[1]);
 			this.point = point;
 			addMarker(point, "Current Point", BitmapDescriptorFactory.HUE_RED);

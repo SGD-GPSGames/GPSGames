@@ -12,6 +12,9 @@ import com.google.android.gms.maps.model.LatLng;
  */
 public abstract class Game<P extends Player> {
 	
+	// TODO Name, final string
+	public String name;
+	
 	// Whether game is started
 	private boolean on;
 	
@@ -29,12 +32,21 @@ public abstract class Game<P extends Player> {
 	 * 
 	 * @param tolerance
 	 */
-	public Game(double tolerance) {
+	public Game(String name, double tolerance) {
+		this.name = name;
 		this.on = false;
 		this.tolerance = tolerance;
 		this.players = new ArrayList<P>();
 	}
 	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public boolean isOn() {
 		return on;
 	}
