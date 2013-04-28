@@ -2,8 +2,10 @@ package com.thinkijustwon.nosockrocks.examples.server;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.util.ArrayList;
 
 import com.thinkijustwon.nosockrocks.socks.StringSocketHandler;
+import com.thinkijustwon.nosockrocks.user.UserThread;
 
 
 
@@ -14,42 +16,60 @@ import com.thinkijustwon.nosockrocks.socks.StringSocketHandler;
  */
 public class SocketServer {
 
-	public static int SERVER_PORT = 7777;
+	public enum SERVER_STATUS {INIT,RUNNING,EXCEPTION};
+	private SERVER_STATUS status = SERVER_STATUS.INIT;
+	private int port;
+	
+	public static ArrayList<UserThread> users;
+	public static ArrayList<Thread> threads;
+	
+	private ServerSocket serverSocket;
 
-	public static void main(String[] args) {
+	public SocketServer(int port){
+		users = new ArrayList<UserThread>();
+		threads = new ArrayList<Thread>();
 		
-		//creates server socket
-		ServerSocket serverSocket;
-		try {
-			serverSocket = new ServerSocket(SERVER_PORT);
+		this.port = port;
+		status = SERVER_STATUS.INIT;
+	}
+	
+	public void run() {
 		
-        while (true) {
-            // listen for incoming clients
-            StringSocketHandler sock = new StringSocketHandler(serverSocket.accept());
-            System.out.println("new client");
-     		
-        
-        	while(!sock.isClosed()){
-        		if (!sock.getIncomingMessages().isEmpty()){
-        			
-	        		String message = (String) sock.getIncomingMessages().poll();
-	        		if (!message.equals("null")){
-		    			sock.write("*"+message);
-		    			System.out.println("line:"+message);
-	        		}
-        		
-        		}
-    
-        	}
-        	System.out.println("client disconnected");
-        	sock.close();
-            
-        }
-        
-		} catch (IOException e1) {
-			e1.printStackTrace();
+		while (status != SERVER_STATUS.EXCEPTION)
+		{
+			if (status == SERVER_STATUS.INIT){
+				try {
+					System.out.println("Starting...");
+					serverSocket = new ServerSocket(port);
+					System.out.println("Server started.....");
+					status = SERVER_STATUS.RUNNING;
+				}
+				catch (IOException e1) {
+					e1.printStackTrace();
+					status = SERVER_STATUS.EXCEPTION;
+				}
+			}
+			else if (status == SERVER_STATUS.RUNNING)
+			{
+				 StringSocketHandler newSock;
+				try {
+					newSock = new StringSocketHandler(serverSocket.accept());
+					 System.out.println("new client");
+		        	 UserThread newUser = new UserThread(newSock);
+		        	 users.add(newUser);
+		             Thread t = new Thread(newUser);
+		             threads.add(t);
+		             t.start();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
-    
+	}
+	
+	public SERVER_STATUS getServerStatus(){
+		return status;
 	}
 
 }
