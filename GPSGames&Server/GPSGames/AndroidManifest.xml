@@ -70,6 +70,11 @@
             android:label="@string/title_activity_select_point" >
         </activity>
         <activity
+            android:name="edu.virginia.cs.sgd.gpsgames.SelectAreaActivity"
+            android:launchMode="singleInstance"
+            android:label="@string/title_activity_select_area" >
+        </activity>
+        <activity
             android:name="edu.virginia.cs.sgd.gpsgames.GameMapActivity"
             android:launchMode="singleInstance"
             android:label="@string/title_activity_game_map" >

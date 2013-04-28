@@ -51,7 +51,7 @@ public class PointPicker {
 	 * @return A list of points selected, or null if not enough points were
 	 *         found in the number of tries
 	 */
-	public ArrayList<LatLng> pickPointsInRadius(LatLng center,
+	public static ArrayList<LatLng> pickPointsInRadius(LatLng center,
 			double minRadius, double radius, int numPoints, boolean water,
 			boolean highway, boolean arterial, boolean local, boolean indoors) {
 
@@ -104,7 +104,7 @@ public class PointPicker {
 	 * @return A list of points selected, or null if not enough points were
 	 *         found in the number of tries
 	 */
-	public ArrayList<LatLng> pickPointInBounds(ArrayList<LatLng> bounds,
+	public static ArrayList<LatLng> pickPointInBounds(ArrayList<LatLng> bounds,
 			int numPoints, boolean water, boolean highway, boolean arterial,
 			boolean local, boolean indoors) {
 
@@ -169,7 +169,7 @@ public class PointPicker {
 	 *            True if buildings/cities are allowed
 	 * @return true if the point is valid; false otherwise
 	 */
-	public boolean isValid(LatLng point, boolean water, boolean highway,
+	public static boolean isValid(LatLng point, boolean water, boolean highway,
 			boolean arterial, boolean local, boolean indoors) {
 
 		BufferedImage b = null;
@@ -208,7 +208,7 @@ public class PointPicker {
 	 * 
 	 * @return The list of triangles covering the same area as the polygon.
 	 */
-	private ArrayList<Triangle> triangulate(ArrayList<LatLng> points) {
+	private static ArrayList<Triangle> triangulate(ArrayList<LatLng> points) {
 
 		if (points.size() < 3) {
 			// TODO Too small
@@ -263,7 +263,7 @@ public class PointPicker {
 	 *            True if buildings/cities are allowed
 	 * @return A String containing the URL for the Google Static Maps request.
 	 */
-	private String getMapUrl(double lat, double lon, int radius, boolean water,
+	private static String getMapUrl(double lat, double lon, int radius, boolean water,
 			boolean highway, boolean arterial, boolean local, boolean indoors) {
 
 		final String coordPair = lat + "," + lon;

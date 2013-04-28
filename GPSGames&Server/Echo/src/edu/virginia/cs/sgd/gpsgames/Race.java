@@ -8,8 +8,8 @@ public class Race extends Game<RacePlayer> {
 	private Point start;
 	private Point end;
 	
-	public Race(double tolerance, LatLng start, LatLng end) {
-		super(tolerance);
+	public Race(String name, double tolerance, LatLng start, LatLng end) {
+		super(name, tolerance);
 
 		this.start = new Point(start, "Start", BitmapDescriptorFactory.HUE_BLUE);
 		this.end = new Point(end, "End", BitmapDescriptorFactory.HUE_BLUE);
@@ -17,7 +17,7 @@ public class Race extends Game<RacePlayer> {
 		addPoint(this.start);
 		addPoint(this.end);
 	}
-
+	
 	@Override
 	public void playerCollision(RacePlayer player, RacePlayer player2) {
 		
