@@ -28,7 +28,7 @@ public class Connection implements Runnable{
 		
 		openSocket();
 		
-		while (open && !sock.isClosed() && !sock.isConnected())
+		while (open && !sock.isClosed() && sock.isConnected())
 		{
 			//wait around and let the socket handler do its job
 			String message = outgoing.poll();
@@ -39,6 +39,7 @@ public class Connection implements Runnable{
 			if (sock.getIncomingMessages() != null)
 			{
 				incoming.addAll(sock.getIncomingMessages());
+				sock.getIncomingMessages().clear();
 			}
 			try {
 				Thread.sleep(100);
