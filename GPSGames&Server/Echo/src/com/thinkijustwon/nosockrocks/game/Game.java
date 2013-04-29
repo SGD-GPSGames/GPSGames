@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import com.thinkijustwon.nosockrocks.user.User;
 import com.thinkijustwon.nosockrocks.user.UserThread;
 
-public class Game implements Runnable{
+public abstract class Game implements Runnable{
 
-	private ArrayList<UserThread> userThreads;
+	public ArrayList<UserThread> userThreads;
 	private UserThread creator;
-	private int capacity = 2; //people in game
+	public int capacity = 2;
 	private int gameID;
-	private String gameTitle; 
 	
 	BlockingQueue<GameMessage> incomingMessages;
 	
@@ -29,23 +29,13 @@ public class Game implements Runnable{
 		while (true){
 			GameMessage g = incomingMessages.poll();
 			if (g != null){
-				//do shit
-				String text = g.getUser().getName()+","+g.getMessage();
-				for (int i = 0; i< userThreads.size(); i++){
-					if (userThreads.get(i).equals(g.getUser())){
-						System.out.println("same:"+text);
-						continue;
-					}
-					else
-					{
-						System.out.println("to:"+userThreads.get(i).getUser().getName()+text);
-						userThreads.get(i).writeMessage(text);
-					}
-				}
+				processMessage(g);
 			}
 		}
 		
 	}
+	
+	public abstract void processMessage(GameMessage g);
 	
 	protected boolean Join(UserThread user){
 		if (userThreads.size() < capacity){
@@ -60,11 +50,37 @@ public class Game implements Runnable{
 	
 	@Override
 	public String toString(){
-		return "<game id='"+this.gameID+"' game_title='"+this.gameTitle+"'/>";		
+		return "<game id='"+this.gameID+"'/>";		
 	}
 	
 	public synchronized boolean sendGameMessage(GameMessage g){
 		return this.incomingMessages.offer(g);
+	}
+	
+	public void sendToAll(String message){
+		for (int i = 0; i< userThreads.size(); i++){
+			System.out.println("to:"+userThreads.get(i).getUser().getName()+message);
+			userThreads.get(i).writeMessage(message);
+		}
+	}
+	
+	public void sendToAllButHost(String message){
+		User host = this.getHost();
+		for (int i = 0; i< userThreads.size(); i++){
+			if (userThreads.get(i).equals(host)){
+				System.out.println("same:"+message);
+				continue;
+			}
+			else
+			{
+				System.out.println("to:"+userThreads.get(i).getUser().getName()+message);
+				userThreads.get(i).writeMessage(message);
+			}
+		}
+	}
+	
+	public User getHost(){
+		return creator.getUser();
 	}
 	
 }
