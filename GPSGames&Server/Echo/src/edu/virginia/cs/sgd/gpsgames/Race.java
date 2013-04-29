@@ -2,14 +2,20 @@ package edu.virginia.cs.sgd.gpsgames;
 
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.thinkijustwon.nosockrocks.game.GameMessage;
+import com.thinkijustwon.nosockrocks.user.UserThread;
 
 public class Race extends Game<RacePlayer> {
 
+	private TimeThread tt;
+	private String startTime;
+	private String endTime;
+	
 	private Point start;
 	private Point end;
 	
-	public Race(String name, double tolerance, LatLng start, LatLng end) {
-		super(name, tolerance);
+	public Race(UserThread creator, int gameID, String gameType, String name, LatLng start, LatLng end) {
+		super(creator, gameID, gameType, name);
 
 		this.start = new Point(start, "Start", BitmapDescriptorFactory.HUE_BLUE);
 		this.end = new Point(end, "End", BitmapDescriptorFactory.HUE_BLUE);
@@ -39,6 +45,11 @@ public class Race extends Game<RacePlayer> {
 
 	@Override
 	public void applyPowerup(RacePlayer player, Powerup p) {
+		
+	}
+
+	@Override
+	public void processMessage(GameMessage g) {
 		
 	}
 }

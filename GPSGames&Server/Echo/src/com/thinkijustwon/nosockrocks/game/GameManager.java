@@ -2,7 +2,10 @@ package com.thinkijustwon.nosockrocks.game;
 
 import java.util.ArrayList;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.thinkijustwon.nosockrocks.user.UserThread;
+
+import edu.virginia.cs.sgd.gpsgames.Race;
 
 public class GameManager {
 
@@ -31,8 +34,22 @@ public class GameManager {
 		return activeGames;
 	}
 	
-	public synchronized Game createGame(UserThread userThread){
-		Game g = new Game(userThread,CUR_GAME_ID);
+	public synchronized Game createGame(UserThread userThread, String gameType, String name, String[] args) {
+		
+		Game g = null;
+		
+		if(gameType.equals("Race")) {
+
+			String[] startStr = args[0].split(",");
+			LatLng start = new LatLng(Double.parseDouble(startStr[0]), Double.parseDouble(startStr[1]));
+			String[] endStr = args[1].split(",");
+			LatLng end = new LatLng(Double.parseDouble(endStr[0]), Double.parseDouble(endStr[1]));
+			
+			g = new Race(userThread,CUR_GAME_ID, gameType, name, start, end);
+		}
+		else if(gameType.equals("Treasure")) {
+			
+		}
 		activeGames.add(g);
 		activeGameIDs.add(CUR_GAME_ID);
 		CUR_GAME_ID++;

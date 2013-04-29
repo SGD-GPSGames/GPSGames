@@ -33,7 +33,13 @@ public abstract class Player {
 	}
 
 	public void updateMap(ArrayList<Point> points) {
+		String msg = "pos:";
 		
+		for(Point p : points) {
+			msg += p + ":";
+		}
+		
+		msg = msg.substring(0, msg.length()-1);
 	}
 	
 	public void message(String msg) {
