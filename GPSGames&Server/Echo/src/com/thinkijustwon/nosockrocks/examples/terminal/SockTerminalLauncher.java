@@ -18,6 +18,8 @@ public class SockTerminalLauncher {
 		boolean setup = false;
 		String ip = "";
 		int port = -1;
+		Scanner in = null;
+		
 		if (args.length == 2){
 			ip = args[1];
 			try{
@@ -31,7 +33,7 @@ public class SockTerminalLauncher {
 		}
 		
 		if (!setup){
-			Scanner in = new Scanner(System.in);
+			in = new Scanner(System.in);
 			System.out.print("ip: ");
 			ip = in.nextLine();
 			System.out.print("port: ");
@@ -52,6 +54,10 @@ public class SockTerminalLauncher {
 				//wait
 			}
 			terminal.close();
+		}
+		
+		if (in != null){
+			in.close();
 		}
 	}
 

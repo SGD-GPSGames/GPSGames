@@ -34,6 +34,7 @@ public class GameMapActivity extends MapActivity {
 		
 	}
 
+
 	@Override
 	public int getLayout() {
 		// TODO Auto-generated method stub
@@ -49,6 +50,10 @@ public class GameMapActivity extends MapActivity {
 	@Override
 	public void setUpUI() {
 		// TODO Auto-generated method stub
+		//show title 
+		//show map
+		//start button -> timer
+		
 
 		back = getIntent().getExtras().getString("Back");
 		backButton = (Button) findViewById(R.id.back);

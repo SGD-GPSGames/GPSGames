@@ -1,6 +1,5 @@
 package edu.virginia.cs.sgd.gpsgames;
 
-import edu.virginia.cs.sgd.gpsgames.util.Constants;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -11,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import edu.virginia.cs.sgd.gpsgames.util.Constants;
+
 
 public class MenuActivity extends FragmentActivity{
 
@@ -28,7 +29,7 @@ public class MenuActivity extends FragmentActivity{
 		setUpUI();
 		
 		welcome.setText("Welcome " + getIntent().getStringExtra(Constants.USERNAME) + "!");
-		
+		//GameController.getInstance().getGames();
 		populateGameList();
 		
 		create.setOnClickListener(new OnClickListener() {

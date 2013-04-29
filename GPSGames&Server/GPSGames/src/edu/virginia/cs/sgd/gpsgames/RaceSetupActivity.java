@@ -120,6 +120,7 @@ public class RaceSetupActivity extends Activity {
 			// TODO Error
 			return;
 		}
+				
 		
 		
 	}

@@ -108,7 +108,7 @@ public class StringSocketHandler {
 		@Override
 		public void run() {
 			while(connected){
-				String message = (String) handler.getOutgoingMessages().poll();
+				String message = handler.getOutgoingMessages().poll();
 				out.println(message);
 			}
 			out.close();
