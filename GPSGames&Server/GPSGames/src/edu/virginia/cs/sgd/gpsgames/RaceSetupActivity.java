@@ -7,6 +7,9 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.TimePicker;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -111,8 +114,37 @@ public class RaceSetupActivity extends Activity {
 		
 	}
 
+	public String getName() {
+		EditText txt = (EditText) findViewById(R.id.title);
+		
+		String title = txt.getText().toString();
+		
+		return title;
+	}
+	
+	public String getTime(int type) {
+		DatePicker d = (DatePicker) findViewById(R.id.startDate);
+		
+		int y = d.getYear();
+		int mo = d.getMonth();
+		int day = d.getDayOfMonth();
+		
+		TimePicker t = (TimePicker) findViewById(type);
+		
+		int h = t.getCurrentHour();
+		int m = t.getCurrentMinute();
+		return y+","+mo+","+day+","+h+","+m;
+	}
+	
+	public String getStartTime() {
+		return getTime(R.id.startTime);
+	}
+	public String getEndTime() {
+		return getTime(R.id.endTime);
+	}
+	
 	public String createMessage() {
-		return "game:create:Race:"+"NAME"+":"+start.latitude+","+start.longitude+";"+end.latitude+","+end.longitude;
+		return "game:create:Race:"+getName()+":"+getStartTime()+";"+getEndTime()+";"+start.latitude+","+start.longitude+";"+end.latitude+","+end.longitude;
 	}
 	
 	public void createGame() {
@@ -121,7 +153,7 @@ public class RaceSetupActivity extends Activity {
 			return;
 		}
 				
-		
+		GameController.getInstance().sendMessage(createMessage());
 		
 	}
 	

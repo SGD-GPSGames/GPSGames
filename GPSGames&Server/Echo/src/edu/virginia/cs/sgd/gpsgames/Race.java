@@ -8,15 +8,18 @@ import com.thinkijustwon.nosockrocks.user.UserThread;
 public class Race extends Game<RacePlayer> {
 
 	private TimeThread tt;
-	private String startTime;
-	private String endTime;
+	private int[] startTime;
+	private int[] endTime;
 	
 	private Point start;
 	private Point end;
 	
-	public Race(UserThread creator, int gameID, String gameType, String name, LatLng start, LatLng end) {
+	public Race(UserThread creator, int gameID, String gameType, String name, int[] startTime, int[] endTime, LatLng start, LatLng end) {
 		super(creator, gameID, gameType, name);
 
+		this.startTime = startTime;
+		this.endTime = endTime;
+		
 		this.start = new Point(start, "Start", BitmapDescriptorFactory.HUE_BLUE);
 		this.end = new Point(end, "End", BitmapDescriptorFactory.HUE_BLUE);
 
@@ -52,4 +55,13 @@ public class Race extends Game<RacePlayer> {
 	public void processMessage(GameMessage g) {
 		
 	}
+	
+	public boolean pairCompare() {
+		return false;
+	}
+	
+	public void timeCheck(int[] time) {
+		
+	}
+	
 }
