@@ -112,7 +112,7 @@ public class RaceSetupActivity extends Activity {
 	}
 
 	public String createMessage() {
-		return "Love";
+		return "game:create:Race:"+"NAME"+":"+start.latitude+","+start.longitude+";"+end.latitude+","+end.longitude;
 	}
 	
 	public void createGame() {

@@ -3,6 +3,7 @@ package edu.virginia.cs.sgd.gpsgames;
 import java.util.ArrayList;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.thinkijustwon.nosockrocks.user.UserThread;
 
 /**
  * The superclass for all games. Handles all players and collisions
@@ -10,16 +11,17 @@ import com.google.android.gms.maps.model.LatLng;
  * @author Jack
  *
  */
-public abstract class Game<P extends Player> {
+public abstract class Game<P extends Player> extends com.thinkijustwon.nosockrocks.game.Game {
+
+	// The range of tolerance for collisions
+	public static final double tolerance = .01;
 	
 	// TODO Name, final string
 	public String name;
+	public String gameType;
 	
 	// Whether game is started
 	private boolean on;
-	
-	// The range of tolerance for collisions
-	private double tolerance;
 	
 	// List of players in game
 	private ArrayList<P> players;
@@ -32,10 +34,11 @@ public abstract class Game<P extends Player> {
 	 * 
 	 * @param tolerance
 	 */
-	public Game(String name, double tolerance) {
+	public Game(UserThread creator, int gameID, String gameType, String name) {
+		super(creator, gameID);
+		this.gameType = gameType;
 		this.name = name;
 		this.on = false;
-		this.tolerance = tolerance;
 		this.players = new ArrayList<P>();
 	}
 	
