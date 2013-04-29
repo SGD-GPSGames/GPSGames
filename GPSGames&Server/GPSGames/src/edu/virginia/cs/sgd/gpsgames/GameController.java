@@ -114,7 +114,7 @@ public class GameController {
 		sendMessage("status:games");	
 	}
 	
-	private void sendMessage(String message){
+	public void sendMessage(String message){
 		Connection connection = mBoundService.getConnection();
 		connection.send(message);
 	}

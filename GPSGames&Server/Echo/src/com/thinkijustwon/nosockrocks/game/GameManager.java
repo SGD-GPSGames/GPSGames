@@ -40,12 +40,23 @@ public class GameManager {
 		
 		if(gameType.equals("Race")) {
 
-			String[] startStr = args[0].split(",");
+			String[] startTimeStr = args[0].split(",");
+			int[] startTime = new int[startTimeStr.length];
+			
+			String[] endTimeStr = args[1].split(",");
+			int[] endTime = new int[endTimeStr.length];
+
+			for(int i = 0; i < startTime.length; i++) {
+				startTime[i] = Integer.parseInt(startTimeStr[i]);
+				endTime[i] = Integer.parseInt(endTimeStr[i]);
+			}
+			
+			String[] startStr = args[2].split(",");
 			LatLng start = new LatLng(Double.parseDouble(startStr[0]), Double.parseDouble(startStr[1]));
-			String[] endStr = args[1].split(",");
+			String[] endStr = args[3].split(",");
 			LatLng end = new LatLng(Double.parseDouble(endStr[0]), Double.parseDouble(endStr[1]));
 			
-			g = new Race(userThread,CUR_GAME_ID, gameType, name, start, end);
+			g = new Race(userThread,CUR_GAME_ID, gameType, name, startTime, endTime, start, end);
 		}
 		else if(gameType.equals("Treasure")) {
 			
