@@ -129,13 +129,17 @@ public class GameController {
 		//place holder
 		int curp = 0; 
 		ArrayList<String>  games = new ArrayList<String>();
-		while(curp < rawGamesList.length() ){
+		String [] gamelist = rawGamesList.split(";");
+		//games.add();
+		/*while(curp < rawGamesList.length() ){
+			int iindex = rawGamesList.indexOf(",");
 			int tindex = rawGamesList.indexOf("title='", curp);
-			int end = rawGamesList.indexOf("'/>", curp);
+			int end = rawGamesList.indexOf(";", curp);
+			String
 			String game = rawGamesList.substring(tindex+7, end-1);
-			games.add(game);
+			
 			curp = end; 
-		}
+		}*/
 		menu.populateGameList(games);
 	}
 	
