@@ -20,5 +20,9 @@
     <string name="title_activity_game_map">GameMapActivity</string>
     <string name="select_button">Pick It!</string>
     <string name="clear_button">Clear Points</string>
+    <string name="title_activity_race">RaceActivity</string>
+    <string name="start_button">Start</string>
+    <string name="map_button">Show Map</string>
+    <string name="back_button">Back</string>
 
 </resources>

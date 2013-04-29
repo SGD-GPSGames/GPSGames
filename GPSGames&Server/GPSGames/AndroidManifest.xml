@@ -3,7 +3,7 @@
     package="edu.virginia.cs.sgd.gpsgames"
     android:versionCode="1"
     android:versionName="1.0" >
-    
+
     <uses-sdk
         android:minSdkVersion="10"
         android:targetSdkVersion="10" />
@@ -56,28 +56,28 @@
         </activity>
         <activity
             android:name="edu.virginia.cs.sgd.gpsgames.RaceSetupActivity"
-            android:launchMode="singleInstance"
-            android:label="@string/title_activity_race_setup" >
+            android:label="@string/title_activity_race_setup"
+            android:launchMode="singleInstance" >
         </activity>
         <activity
             android:name="edu.virginia.cs.sgd.gpsgames.TreasureSetupActivity"
-            android:launchMode="singleInstance"
-            android:label="@string/title_activity_treasure_setup" >
+            android:label="@string/title_activity_treasure_setup"
+            android:launchMode="singleInstance" >
         </activity>
         <activity
             android:name="edu.virginia.cs.sgd.gpsgames.SelectPointActivity"
-            android:launchMode="singleInstance"
-            android:label="@string/title_activity_select_point" >
+            android:label="@string/title_activity_select_point"
+            android:launchMode="singleInstance" >
         </activity>
         <activity
             android:name="edu.virginia.cs.sgd.gpsgames.SelectAreaActivity"
-            android:launchMode="singleInstance"
-            android:label="@string/title_activity_select_area" >
+            android:label="@string/title_activity_select_area"
+            android:launchMode="singleInstance" >
         </activity>
         <activity
             android:name="edu.virginia.cs.sgd.gpsgames.GameMapActivity"
-            android:launchMode="singleInstance"
-            android:label="@string/title_activity_game_map" >
+            android:label="@string/title_activity_game_map"
+            android:launchMode="singleInstance" >
         </activity>
 
         <meta-data
@@ -90,6 +90,10 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.virginia.cs.sgd.gpsgames.MenuActivity" />
+        </activity>
+        <activity
+            android:name="edu.virginia.cs.sgd.gpsgames.RaceActivity"
+            android:label="@string/title_activity_race" >
         </activity>
     </application>
 

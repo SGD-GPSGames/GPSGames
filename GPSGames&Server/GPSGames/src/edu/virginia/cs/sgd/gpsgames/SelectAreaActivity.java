@@ -93,7 +93,7 @@ public class SelectAreaActivity extends MapActivity {
 			list.add(0, point);
 			points.setPoints(list);
 		}
-		
+		mapView.invalidate();
 	}
 
 	public void moveToOldActivity() {
