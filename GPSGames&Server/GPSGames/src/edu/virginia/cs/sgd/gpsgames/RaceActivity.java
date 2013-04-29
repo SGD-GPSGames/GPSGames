@@ -1,7 +1,11 @@
 package edu.virginia.cs.sgd.gpsgames;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -9,7 +13,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class RaceActivity extends Activity {
+public class RaceActivity extends Activity implements LocationListener{
 
 	Button startButton;
 	Button mapButton;
@@ -76,6 +80,26 @@ public class RaceActivity extends Activity {
 		baseTime = System.nanoTime();
 		
 		on = true;
+	}
+	@Override
+	public void onLocationChanged(Location loc) {
+		GameController.getInstance().sendMessage("loc:" + loc.getLatitude() + "," + loc.getLongitude());
+		
+	}
+	@Override
+	public void onProviderDisabled(String provider) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void onProviderEnabled(String provider) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void onStatusChanged(String provider, int status, Bundle extras) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

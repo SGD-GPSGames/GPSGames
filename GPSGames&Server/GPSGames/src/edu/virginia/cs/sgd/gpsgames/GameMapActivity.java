@@ -15,6 +15,9 @@ public class GameMapActivity extends MapActivity {
 	String back;
 	Button backButton;
 	
+	public LatLng playerPos;
+	public LatLng goalPos;
+	
 	public LatLng getCurrentLocation() {
 		Location l = map.getMyLocation();
 		

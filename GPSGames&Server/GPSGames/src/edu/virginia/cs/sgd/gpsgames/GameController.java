@@ -99,8 +99,12 @@ public class GameController {
 	}
 	
 	public void sendLogin(String user, String pass){
+		sendMessage("login:" + user + "," + pass);
+	}
+	
+	public void sendMessage(String msg) {
 		Connection connection = mBoundService.getConnection();
-		connection.send("login:" + user + "," + pass);
+		connection.send(msg);
 	}
 	
 	public void loggedIn(){
