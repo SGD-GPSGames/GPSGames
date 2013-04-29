@@ -127,8 +127,8 @@ public class GameController {
 	public void populateGames(String rawGamesList){
 		//process the string
 		//place holder
-		int curp = 0; 
-		ArrayList<String>  games = new ArrayList<String>();
+		//int curp = 0; 
+		//ArrayList<String>  games = new ArrayList<String>();
 		String [] gamelist = rawGamesList.split(";");
 		//games.add();
 		/*while(curp < rawGamesList.length() ){
@@ -140,7 +140,7 @@ public class GameController {
 			
 			curp = end; 
 		}*/
-		menu.populateGameList(games);
+		menu.populateGameList(gamelist);
 	}
 	
 	

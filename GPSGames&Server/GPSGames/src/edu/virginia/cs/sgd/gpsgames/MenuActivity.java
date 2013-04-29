@@ -60,10 +60,14 @@ public class MenuActivity extends FragmentActivity{
 		startActivity(mainActivity);
 	}
 	
-	public void populateGameList(ArrayList<String> games) {
-		
+	public void populateGameList(String[] games) {
+		ArrayList<String> gameTitles = new ArrayList<String>();
+		for(int i = 0; i <games.length; i++){
+			String temp[] = games[i].split(",");
+			gameTitles.add(temp[1]);
+		}
 		ArrayAdapter adapter = new ArrayAdapter<String>(this, 
-		        android.R.layout.simple_list_item_1, games);
+		        android.R.layout.simple_list_item_1, gameTitles);
 		
 		gameList.setAdapter(adapter);
 	}
