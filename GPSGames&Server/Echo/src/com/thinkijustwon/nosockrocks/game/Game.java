@@ -10,8 +10,9 @@ public class Game implements Runnable{
 
 	private ArrayList<UserThread> userThreads;
 	private UserThread creator;
-	private int capacity = 2;
+	private int capacity = 2; //people in game
 	private int gameID;
+	private String gameTitle; 
 	
 	BlockingQueue<GameMessage> incomingMessages;
 	
@@ -59,7 +60,7 @@ public class Game implements Runnable{
 	
 	@Override
 	public String toString(){
-		return "<game id='"+this.gameID+"'/>";		
+		return "<game id='"+this.gameID+"' game_title='"+this.gameTitle+"'/>";		
 	}
 	
 	public synchronized boolean sendGameMessage(GameMessage g){

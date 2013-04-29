@@ -91,6 +91,12 @@ public class UserThread implements Runnable{
 					activeGames.get(i).sendGameMessage(new GameMessage(this.getUser(),text));
 				}
 			}
+			if (message.startsWith("status:")){
+				String text = message.replace("status:","");
+				if (text.startsWith("games")){
+					writeMessage(activeGames.toString());
+				}
+			}
 		}
 	}
 	

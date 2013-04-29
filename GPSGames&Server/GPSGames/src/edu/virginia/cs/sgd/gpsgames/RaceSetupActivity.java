@@ -111,6 +111,10 @@ public class RaceSetupActivity extends Activity {
 		
 	}
 
+	public String createMessage() {
+		return "Love";
+	}
+	
 	public void createGame() {
 		if(start == null || end == null) {
 			// TODO Error
