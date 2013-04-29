@@ -94,7 +94,7 @@ public class UserThread implements Runnable{
 			if (message.startsWith("status:")){
 				String text = message.replace("status:","");
 				if (text.startsWith("games")){
-					writeMessage(activeGames.toString());
+					writeMessage("status:games,"+activeGames.toString());
 				}
 			}
 		}

@@ -26,6 +26,12 @@ public class ReaderThread implements Runnable {
 				if(message.equals("login:success")) {
 					GameController.getInstance().loggedIn();
 				}
+				if(message.startsWith("status:")){
+					String action = message.replace("status:", "");
+					if (action.startsWith("games,")){
+						GameController.getInstance().populateGames(action.replace("games,", ""));
+					}
+				}
 			}
 		}
 

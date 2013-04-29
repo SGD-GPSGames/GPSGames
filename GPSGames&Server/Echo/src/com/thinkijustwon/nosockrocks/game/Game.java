@@ -58,9 +58,10 @@ public class Game implements Runnable{
 		return gameID;
 	}
 	
+	
 	@Override
 	public String toString(){
-		return "<game id='"+this.gameID+"' game_title='"+this.gameTitle+"'/>";		
+		return "<game id='"+this.gameID+"' game title='"+this.gameTitle+"'/>";		
 	}
 	
 	public synchronized boolean sendGameMessage(GameMessage g){

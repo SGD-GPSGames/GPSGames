@@ -1,5 +1,7 @@
 package edu.virginia.cs.sgd.gpsgames;
 
+import java.util.ArrayList;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -29,8 +31,10 @@ public class MenuActivity extends FragmentActivity{
 		setUpUI();
 		
 		welcome.setText("Welcome " + getIntent().getStringExtra(Constants.USERNAME) + "!");
-		//GameController.getInstance().getGames();
-		populateGameList();
+		GameController.getInstance().setGameMenuActivity(this);
+
+		GameController.getInstance().getGames();
+		//populateGameList();
 		
 		create.setOnClickListener(new OnClickListener() {
 			
@@ -56,8 +60,8 @@ public class MenuActivity extends FragmentActivity{
 		startActivity(mainActivity);
 	}
 	
-	public void populateGameList() {
-		String[]  games = { "Game 1", "Game 2", "Game 3", "Game 4", "Game 5", "Game 6", "Game 7", "Game 8"};
+	public void populateGameList(ArrayList<String> games) {
+		
 		ArrayAdapter adapter = new ArrayAdapter<String>(this, 
 		        android.R.layout.simple_list_item_1, games);
 		
