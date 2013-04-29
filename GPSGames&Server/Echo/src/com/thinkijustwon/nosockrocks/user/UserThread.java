@@ -68,9 +68,18 @@ public class UserThread implements Runnable{
 			
 			if (message.startsWith("game:")){
 				String action = message.replace("game:", "");
-				if (action.startsWith("create")){
+				if (action.startsWith("create:")){
 					//figure out what type
-					Game g = GameManager.getInstance().createGame(this);
+					String create = message.replace("create:", "");
+					String[] game = create.split(":");
+					
+					if(game.length != 3) {
+						//TODO Fail
+					}
+					
+					String[] args = game[2].split(";");
+					
+					Game g = GameManager.getInstance().createGame(this, game[0], game[1], args);
 					activeGames.add(g);
 				}
 				if (action.startsWith("list")){
@@ -94,7 +103,7 @@ public class UserThread implements Runnable{
 			if (message.startsWith("status:")){
 				String text = message.replace("status:","");
 				if (text.startsWith("games")){
-					writeMessage(activeGames.toString());
+					writeMessage("status:games,"+activeGames.toString());
 				}
 			}
 		}

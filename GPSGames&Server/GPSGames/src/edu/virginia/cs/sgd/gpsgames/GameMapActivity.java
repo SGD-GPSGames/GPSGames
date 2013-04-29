@@ -1,7 +1,5 @@
 package edu.virginia.cs.sgd.gpsgames;
 
-import java.util.ArrayList;
-
 import android.content.Intent;
 import android.location.Location;
 import android.view.View;
@@ -15,23 +13,28 @@ public class GameMapActivity extends MapActivity {
 	String back;
 	Button backButton;
 	
-	public LatLng playerPos;
-	public LatLng goalPos;
-	
+
 	public LatLng getCurrentLocation() {
 		Location l = map.getMyLocation();
-		
+
 		return new LatLng(l.getLatitude(), l.getLongitude());
 	}
 
-	public void update(ArrayList<Point> points) {
-		
-		map.clear();
-		
-		for(Point p : points) {
-			addMarker(p.getPosition(), p.getTitle(), p.getColor());
+	public void update(String msg) {
+
+		if(msg.startsWith("pos:")) {
+			msg = msg.replace("pos:", "");
+			String[] pointsStr = msg.split(":");
+
+			map.clear();
+
+			for(String p : pointsStr) {
+				String[] pInfo = p.split(";");
+
+				String[] pos = pInfo[0].split(",");
+				addMarker(new LatLng(Double.parseDouble(pos[0]), Double.parseDouble(pos[0])), pInfo[1], Float.parseFloat(pInfo[2]));
+			}
 		}
-		
 	}
 
 
@@ -40,11 +43,11 @@ public class GameMapActivity extends MapActivity {
 		// TODO Auto-generated method stub
 		return R.layout.activity_map;
 	}
-	
+
 	@Override
 	public void onClick(LatLng point) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -53,19 +56,19 @@ public class GameMapActivity extends MapActivity {
 		//show title 
 		//show map
 		//start button -> timer
-		
+
 
 		back = getIntent().getExtras().getString("Back");
 		backButton = (Button) findViewById(R.id.back);
 
 		backButton.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				moveToLastActivity();
 			}
 		});
-		
+
 	}
 
 	public void moveToLastActivity() {
@@ -75,12 +78,12 @@ public class GameMapActivity extends MapActivity {
 			next = RaceActivity.class;
 		}
 		else if(back.equals("Treasure")) {
-			
+
 		}
-		
+
 		Intent mainActivity = new Intent(this, next);
 
 		startActivity(mainActivity);
 	}
-	
+
 }

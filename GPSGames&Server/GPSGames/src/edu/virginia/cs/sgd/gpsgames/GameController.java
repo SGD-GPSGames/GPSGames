@@ -1,5 +1,7 @@
 package edu.virginia.cs.sgd.gpsgames;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
@@ -17,6 +19,7 @@ public class GameController {
 	private static GameController instance;
 	
 	private LoginActivity login;
+	private MenuActivity menu;
 
 	private ServiceConnection mConnection;
 
@@ -100,17 +103,46 @@ public class GameController {
 	
 	public void sendLogin(String user, String pass){
 		sendMessage("login:" + user + "," + pass);
-	}
-	
-	public void sendMessage(String msg) {
-		Connection connection = mBoundService.getConnection();
-		connection.send(msg);
+
 	}
 	
 	public void loggedIn(){
 		login.moveToMenuActivity();
 	}
+
+
+	public void getGames() {
+		sendMessage("status:games");	
+	}
 	
+	private void sendMessage(String message){
+		Connection connection = mBoundService.getConnection();
+		connection.send(message);
+	}
+
+
+	public void setGameMenuActivity(MenuActivity menuActivity) {
+		menu = menuActivity; 
+	}
+	
+	public void populateGames(String rawGamesList){
+		//process the string
+		//place holder
+		int curp = 0; 
+		ArrayList<String>  games = new ArrayList<String>();
+		String [] gamelist = rawGamesList.split(";");
+		//games.add();
+		/*while(curp < rawGamesList.length() ){
+			int iindex = rawGamesList.indexOf(",");
+			int tindex = rawGamesList.indexOf("title='", curp);
+			int end = rawGamesList.indexOf(";", curp);
+			String
+			String game = rawGamesList.substring(tindex+7, end-1);
+			
+			curp = end; 
+		}*/
+		menu.populateGameList(games);
+	}
 	
 	
 }
