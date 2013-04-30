@@ -25,6 +25,9 @@ public class Race extends Game<RacePlayer> {
 
 		addPoint(this.start);
 		addPoint(this.end);
+		
+		tt = new TimeThread(this);
+		tt.start();
 	}
 	
 	@Override
@@ -56,11 +59,30 @@ public class Race extends Game<RacePlayer> {
 		
 	}
 	
-	public boolean pairCompare() {
-		return false;
+	public int timeCompare(int[] time1, int[] time2) {
+		
+		for(int i = 0; i < time1.length; i++) {
+			if(time1[i] > time2[i]) {
+				return -1;
+			}
+			else if (time1[i] < time2[i]) {
+				return 1;
+			}
+		}
+		
+		return 0;
 	}
 	
 	public void timeCheck(int[] time) {
+		
+		if(timeCompare(time, startTime) > -1) {
+			setOn(true);
+		}
+		
+		if(timeCompare(time, endTime) < 1) {
+			setOn(false);
+			tt.stopThread();
+		}
 		
 	}
 	
