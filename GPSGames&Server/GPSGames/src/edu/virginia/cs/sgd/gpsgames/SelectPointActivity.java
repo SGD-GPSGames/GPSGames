@@ -48,9 +48,11 @@ public class SelectPointActivity extends MapActivity implements PointRequestor {
 	@Override
 	public void onClick(LatLng point) {
 		
-		PointPicker picker = new PointPicker(this);
+//		PointPicker picker = new PointPicker(this);
+//		
+//		picker.pickPoint(point);
 		
-		picker.pickPoint(point);
+		pointCheck(point, true);
 	}
 	
 	public void moveToRaceSetupActivity() {

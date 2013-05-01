@@ -18,6 +18,8 @@ public abstract class Game<P extends Player> extends com.thinkijustwon.nosockroc
 	// The range of tolerance for collisions
 	public static final double tolerance = .01;
 	
+	public GameThread gt;
+	
 	// TODO Name, final string
 	public String name;
 	public String gameType;
@@ -42,6 +44,9 @@ public abstract class Game<P extends Player> extends com.thinkijustwon.nosockroc
 		this.name = name;
 		this.on = false;
 		this.players = new ArrayList<P>();
+		
+		gt = new GameThread(this);
+		gt.start();
 	}
 	
 	public String getName() {
@@ -181,6 +186,10 @@ public abstract class Game<P extends Player> extends com.thinkijustwon.nosockroc
 	
 	public String toString() {
 		return getID() + "," + gameType +"," + name + ";";
+	}
+	
+	public void update(int[] time) {
+		checkCollision();
 	}
 	
 }

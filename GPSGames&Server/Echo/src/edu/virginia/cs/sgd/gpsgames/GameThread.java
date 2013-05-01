@@ -2,10 +2,10 @@ package edu.virginia.cs.sgd.gpsgames;
 
 import java.util.Calendar;
 
-public class TimeThread extends Thread {
+public class GameThread extends Thread {
 
 	// The race
-	private Race race;
+	private Game game;
 
 	// Whether to stop the program before the next step
 	private boolean stop;
@@ -20,9 +20,9 @@ public class TimeThread extends Thread {
 	 *            true if the program should stop; false otherwise
 	 * 
 	 */
-	public TimeThread(Race race) {
+	public GameThread(Game game) {
 		super();
-		this.race = race;
+		this.game = game;
 		this.stop = false;
 	}
 
@@ -37,7 +37,7 @@ public class TimeThread extends Thread {
 				Calendar.getInstance().get(Calendar.SECOND) };
 		
 		while (!stop) {
-			race.timeCheck(date);
+			game.update(date);
 		}
 
 	}

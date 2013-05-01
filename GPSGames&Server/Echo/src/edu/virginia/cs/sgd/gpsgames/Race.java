@@ -7,8 +7,6 @@ import com.thinkijustwon.nosockrocks.user.UserThread;
 
 public class Race extends Game<RacePlayer> {
 
-
-	private TimeThread tt;
 	private int[] startTime;
 	private int[] endTime;
 
@@ -28,8 +26,6 @@ public class Race extends Game<RacePlayer> {
 		addPoint(this.start);
 		addPoint(this.end);
 		
-		tt = new TimeThread(this);
-		tt.start();
 	}
 	
 	@Override
@@ -87,10 +83,8 @@ public class Race extends Game<RacePlayer> {
 		
 		if(timeCompare(time, endTime) < 1) {
 			setOn(false);
-			tt.stopThread();
 		}
 		
-		checkCollision();
 	}
 
 	@Override
@@ -100,4 +94,10 @@ public class Race extends Game<RacePlayer> {
 		
 	}
 	
+	@Override
+	public void update(int[] time) {
+		super.update(time);
+		
+		timeCheck(time);
+	}
 }
