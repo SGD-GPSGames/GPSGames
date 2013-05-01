@@ -7,9 +7,11 @@ import com.thinkijustwon.nosockrocks.user.UserThread;
 
 public class Race extends Game<RacePlayer> {
 
+
 	private TimeThread tt;
 	private int[] startTime;
 	private int[] endTime;
+
 	
 	private Point start;
 	private Point end;

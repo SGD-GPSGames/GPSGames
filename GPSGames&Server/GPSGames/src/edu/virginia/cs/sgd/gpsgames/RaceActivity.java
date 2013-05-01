@@ -77,5 +77,6 @@ public class RaceActivity extends Activity {
 		
 		on = true;
 	}
+
 	
 }

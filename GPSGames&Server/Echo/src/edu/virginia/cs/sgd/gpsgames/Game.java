@@ -3,6 +3,8 @@ package edu.virginia.cs.sgd.gpsgames;
 import java.util.ArrayList;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.thinkijustwon.nosockrocks.game.GameMessage;
+import com.thinkijustwon.nosockrocks.user.User;
 import com.thinkijustwon.nosockrocks.user.UserThread;
 
 /**
@@ -118,6 +120,31 @@ public abstract class Game<P extends Player> extends com.thinkijustwon.nosockroc
 			}
 			
 		}
+	}
+	
+	@Override
+	public void processMessage(GameMessage g){
+		String message = g.getMessage();
+		Player player = search(g.getUser());
+		if(player == null) return;
+		
+		String[] parts = message.split(":");
+		String[] params = parts[1].split(",");
+		if(parts[0].equals("loc")) {
+			double lat = Double.parseDouble(params[0]);
+			double lon = Double.parseDouble(params[1]);
+			player.getPoint().setPosition(new LatLng(lat, lon));
+		}
+	}
+	
+	
+	public P search(User u) {
+		for(P player : players) {
+			if(player.getName().equals(u.getName())) {
+				return player;
+			}
+		}
+		return null;
 	}
 	
 	public void postGame() {

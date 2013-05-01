@@ -12,6 +12,7 @@ public class GameMapActivity extends MapActivity {
 
 	String back;
 	Button backButton;
+	
 
 	public void update(String msg) {
 
