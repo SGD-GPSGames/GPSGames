@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
@@ -28,7 +29,8 @@ public class GameController {
 	protected ReaderThread thread;
 
 	private boolean mIsBound;
-	
+
+	private Handler ui = new Handler();
 
 	public static GameController getInstance() {
 		if(instance == null) {
@@ -128,7 +130,7 @@ public class GameController {
 		//process the string
 		//place holder
 		int curp = 0; 
-		ArrayList<String>  games = new ArrayList<String>();
+		final ArrayList<String>  games = new ArrayList<String>();
 		String [] gamelist = rawGamesList.split(";");
 		//games.add();
 		/*while(curp < rawGamesList.length() ){
@@ -140,7 +142,14 @@ public class GameController {
 			
 			curp = end; 
 		}*/
-		menu.populateGameList(games);
+		
+		ui.post(new Runnable() {
+			public void run() {
+
+				menu.populateGameList(games);
+				
+			}
+		});
 	}
 	
 	

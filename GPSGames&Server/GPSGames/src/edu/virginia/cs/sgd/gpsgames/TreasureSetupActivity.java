@@ -55,10 +55,10 @@ public class TreasureSetupActivity extends Activity {
 	
 	public void pickArea() {
 		Intent mainActivity = new Intent(this, SelectAreaActivity.class);
-		mainActivity.putExtra("Name", "Treasure");
+		mainActivity.putExtra("edu.virginia.cs.sgd.gpsgames.Name", "Treasure");
 		
 		if(area != null) {
-			mainActivity.putExtra("Points", area);
+			mainActivity.putExtra("edu.virginia.cs.sgd.gpsgames.Points", area);
 		}
 		startActivity(mainActivity);
 	}
@@ -74,13 +74,13 @@ public class TreasureSetupActivity extends Activity {
 	public void getPoints() {
 		Bundle ex = getIntent().getExtras();
 		
-		String name = (ex == null ? null : ex.getString("Name"));
+		String name = (ex == null ? null : ex.getString("edu.virginia.cs.sgd.gpsgames.Name"));
 		
 		if(name == null) {
 			return;
 		}
 		else  {
-			Object obj = ex.get("Points");
+			Object obj = ex.get("edu.virginia.cs.sgd.gpsgames.Points");
 
 			double[][] pointArr = (obj == null ? null : (double[][]) obj);
 

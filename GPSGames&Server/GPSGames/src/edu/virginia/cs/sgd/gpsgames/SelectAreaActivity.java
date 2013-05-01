@@ -52,8 +52,8 @@ public class SelectAreaActivity extends MapActivity {
 
 		Bundle ex = getIntent().getExtras();
 		
-		String str = ex.getString("Name");
-		Object obj = ex.get("Points");
+		String str = ex.getString("edu.virginia.cs.sgd.gpsgames.Name");
+		Object obj = ex.get("edu.virginia.cs.sgd.gpsgames.Points");
 
 		name = (str == null ? "" : str);
 
@@ -101,7 +101,7 @@ public class SelectAreaActivity extends MapActivity {
 		//REPLACE MenuActivity.class BELOW WITH CLASS YOU WANT TO GO TO
 		Intent mainActivity = new Intent(this, TreasureSetupActivity.class);
 
-		mainActivity.putExtra("Name", name);
+		mainActivity.putExtra("edu.virginia.cs.sgd.gpsgames.Name", name);
 
 		List<LatLng> list = points.getPoints();
 		double[][] pointArr = new double[list.size()][2];
@@ -110,7 +110,7 @@ public class SelectAreaActivity extends MapActivity {
 			pointArr[i][0] = list.get(i).latitude;
 			pointArr[i][1] = list.get(i).longitude;
 		}
-		mainActivity.putExtra("Points", pointArr);
+		mainActivity.putExtra("edu.virginia.cs.sgd.gpsgames.Points", pointArr);
 
 		map.clear();
 		points = null;

@@ -58,6 +58,12 @@ public class RaceSetupActivity extends Activity {
 		getPoints();
 	}
 
+	protected void onResume() {
+		super.onResume();
+		
+		getPoints();
+	}
+	
 	public void setUpUI(){
 		selectStart = (Button) findViewById(R.id.pick_start);
 		selectEnd = (Button) findViewById(R.id.pick_end);
@@ -95,17 +101,20 @@ public class RaceSetupActivity extends Activity {
 		Bundle ex = getIntent().getExtras();
 		
 		
-		String name = (ex == null ? null : ex.getString("Name"));
+		String name = (ex == null ? null : ex.getString("edu.virginia.cs.sgd.gpsgames.Name"));
 		
 		if(name == null) {
-			return;
+			name = "";
+			//return;
 		}
-		else if(name.equals("Start")) {
-			double[] coords = ex.getDoubleArray("Point");
+		//else
+		GameController.getInstance().sendMessage("Name: " + name);
+			if(name.equals("Start")) {
+			double[] coords = ex.getDoubleArray("edu.virginia.cs.sgd.gpsgames.Point");
 			start = new LatLng(coords[0], coords[1]);
 		}
 		else if(name.equals("End")) {
-			double[] coords = ex.getDoubleArray("Point");
+			double[] coords = ex.getDoubleArray("edu.virginia.cs.sgd.gpsgames.Point");
 			end = new LatLng(coords[0], coords[1]);
 		}
 		else {
@@ -146,15 +155,24 @@ public class RaceSetupActivity extends Activity {
 	public String createMessage() {
 		return "game:create:Race:"+getName()+":"+getStartTime()+";"+getEndTime()+";"+start.latitude+","+start.longitude+";"+end.latitude+","+end.longitude;
 	}
+
+	public void moveToRaceActivity() {
+		//REPLACE MenuActivity.clss BELOW WITH CLASS YOU WANT TO GO TO
+		Intent mainActivity = new Intent(this, RaceActivity.class);
+		startActivity(mainActivity);
+	}
 	
 	public void createGame() {
 		if(start == null || end == null) {
 			// TODO Error
-			return;
+			//return;
+			start = new LatLng(0,0);
+			end = new LatLng(0, 1);
 		}
 				
 		GameController.getInstance().sendMessage(createMessage());
 		
+		moveToRaceActivity();
 	}
 	
 }
