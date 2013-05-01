@@ -46,6 +46,7 @@ public class MenuActivity extends FragmentActivity{
 	
 	@Override
 	public void onResume(){
+		super.onResume();
 		GameController.getInstance().getGames();
 	}
 

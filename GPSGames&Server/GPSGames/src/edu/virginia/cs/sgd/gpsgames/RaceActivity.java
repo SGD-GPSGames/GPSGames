@@ -3,6 +3,9 @@ package edu.virginia.cs.sgd.gpsgames;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Handler.Callback;
+import android.os.Message;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,15 +20,29 @@ public class RaceActivity extends Activity {
 	private boolean on;
 	private long baseTime;
 	
+	Handler h2 = new Handler();
+	Runnable run = new Runnable() {
+
+	        @Override
+	        public void run() {
+	           updateTime();
+	           h2.postDelayed(this, 500);
+	        }
+	};
+	
 	public void updateTime() {
 		TextView time = (TextView) findViewById(R.id.time);
 		
 		time.setText(Integer.toString((int)((System.nanoTime()-baseTime)/1E9)));
 	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_race);
+		
+
+        setUpUI();
 		
 		on = false;
 	}
@@ -74,6 +91,7 @@ public class RaceActivity extends Activity {
 		}
 		
 		baseTime = System.nanoTime();
+        h2.postDelayed(run, 0);
 		
 		on = true;
 	}
