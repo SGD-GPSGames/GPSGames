@@ -1,6 +1,8 @@
 package edu.virginia.cs.sgd.gpsgames;
 
 import android.app.Activity;
+import android.location.Location;
+import android.location.LocationListener;
 import android.os.Bundle;
 import android.view.Menu;
 
@@ -20,7 +22,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
  * @author Jack
  *
  */
-public abstract class Game extends Activity {
+public abstract class Game extends Activity implements LocationListener{
 
 	protected MapView mapView;
 	protected GoogleMap map;
@@ -101,6 +103,11 @@ public abstract class Game extends Activity {
 		.title(title)
 		.icon(BitmapDescriptorFactory.defaultMarker(color)));
 		
+	}
+	
+	@Override
+	public void onLocationChanged(Location loc) {
+		GameController.getInstance().sendMessage("loc:" + loc.getLatitude() + "," + loc.getLongitude());
 	}
 	
 	public abstract int getLayout();

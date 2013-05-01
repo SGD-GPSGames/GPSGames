@@ -51,8 +51,9 @@ public class PointPicker {
 			+ "&style=feature:road.arterial|color:" + (arterial ? "0xffffff" : "0x000000")
 			+ "&style=feature:road.local|color:" + (local ? "0xffffff" : "0x000000")
 			+ "&style=feature:poi|color:0xffffff"
-			+ "&style=feature:landscape.natural|color:0xffffff"
-			+ "&style=feature:landscape.man_made|color:0x000000";
+//			+ "&style=feature:landscape.natural|color:0xffffff"
+//			+ "&style=feature:landscape.man_made|color:0xffffff"; 
+			+ "&style=feature:landscape|color:0xffffff";  
 		}
 		
 		private boolean getValidity(Bitmap b) {

@@ -32,9 +32,6 @@ public class MenuActivity extends FragmentActivity{
 		
 		welcome.setText("Welcome " + getIntent().getStringExtra(Constants.USERNAME) + "!");
 		GameController.getInstance().setGameMenuActivity(this);
-
-		GameController.getInstance().getGames();
-		//populateGameList();
 		
 		create.setOnClickListener(new OnClickListener() {
 			
@@ -45,6 +42,12 @@ public class MenuActivity extends FragmentActivity{
 		});
 		
 		
+	}
+	
+	@Override
+	public void onResume(){
+		super.onResume();
+		GameController.getInstance().getGames();
 	}
 
 	public void setUpUI(){

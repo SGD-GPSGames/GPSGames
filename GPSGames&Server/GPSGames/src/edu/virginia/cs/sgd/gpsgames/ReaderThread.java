@@ -9,7 +9,6 @@ import edu.virginia.cs.sgd.gpsgames.connection.Connection;
 public class ReaderThread implements Runnable {
 
 	Connection conn;
-	Class activityClass;
 	
 	public ReaderThread(Connection connection) {
 		conn = connection;
@@ -33,6 +32,8 @@ public class ReaderThread implements Runnable {
 					}
 				}
 			}
+			
+			
 		}
 
 	}

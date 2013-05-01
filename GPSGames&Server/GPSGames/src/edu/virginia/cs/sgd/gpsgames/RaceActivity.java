@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Handler.Callback;
+import android.os.Message;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,17 +22,31 @@ public class RaceActivity extends Activity {
 	private boolean on;
 	private long baseTime;
 	
+	Handler h2 = new Handler();
+	Runnable run = new Runnable() {
+
+	        @Override
+	        public void run() {
+	           updateTime();
+	           h2.postDelayed(this, 500);
+	        }
+	};
+	
 	public void updateTime() {
 		TextView time = (TextView) findViewById(R.id.time);
 		
 		time.setText(Integer.toString((int)((System.nanoTime()-baseTime)/1E9)));
 	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.setRequestedOrientation(
 				ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); 
 		setContentView(R.layout.activity_race);
+		
+
+        setUpUI();
 		
 		on = false;
 	}
@@ -50,7 +67,7 @@ public class RaceActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				onStart();
+				start();
 			}
 
 		});
@@ -87,18 +104,21 @@ public class RaceActivity extends Activity {
 
 	public void moveToGameMapActivity() {
 		Intent mainActivity = new Intent(this, GameMapActivity.class);
-		mainActivity.putExtra("Back", "Race");
+		GameController.getInstance().put("Back", "Race");
 		startActivity(mainActivity);
 	}
 	
-	public void onStart() {
+	public void start() {
 		if(on) {
 			return;
 		}
 		
 		baseTime = System.nanoTime();
-		
+        h2.postDelayed(run, 0);
+		GameController.getInstance().sendMessage("gmessage:Race:start");
+        
 		on = true;
 	}
+
 	
 }

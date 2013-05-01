@@ -65,7 +65,8 @@ public class UserThread implements Runnable{
 		}
 		else{
 			userThread.write("ack:"+message);
-			System.out.println("message received"+message);
+			System.out.println("Message Received: " + message);
+			
 			if (message.startsWith("game:")){
 				String action = message.replace("game:", "");
 				if (action.startsWith("create:")){

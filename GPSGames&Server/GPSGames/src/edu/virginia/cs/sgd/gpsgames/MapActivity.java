@@ -1,12 +1,17 @@
 package edu.virginia.cs.sgd.gpsgames;
 
 import android.app.Activity;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.Menu;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
+import com.google.android.gms.maps.LocationSource;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -24,7 +29,7 @@ public abstract class MapActivity extends Activity {
 
 	protected MapView mapView;
 	protected GoogleMap map;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -53,7 +58,12 @@ public abstract class MapActivity extends Activity {
 			
 		});
 		
+		map.setIndoorEnabled(true);
+		map.moveCamera(CameraUpdateFactory.zoomTo(20));
 		map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+		
+		map.moveCamera(CameraUpdateFactory.newLatLng(GameController.getInstance().getCurrentLocation()));
+		
 		setUpUI();
 	}
 

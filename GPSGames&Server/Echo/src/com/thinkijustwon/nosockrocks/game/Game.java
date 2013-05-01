@@ -23,6 +23,11 @@ public abstract class Game implements Runnable{
 		this.Join(this.creator);
 	}
 
+	public boolean addUser(UserThread user) {
+		addPlayer(user.getUser().getName());
+		return userThreads.add(user);
+	}
+
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
@@ -84,4 +89,6 @@ public abstract class Game implements Runnable{
 		return creator.getUser();
 	}
 	
+
+	public abstract void addPlayer(String name);
 }

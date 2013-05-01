@@ -34,13 +34,11 @@ public class SelectPointActivity extends MapActivity implements PointRequestor {
 			
 		});
 
-		Bundle ex = getIntent().getExtras();
-		String str = ex.getString("Name");
+		//name = (String) GameController.getInstance().get("Pick");
 		
-		name = (str == null ? "" : str);
-		
-		double[] pointArr = ex.getDoubleArray("Point");
-		if(point != null && pointArr != null) {
+		Object pointObj = GameController.getInstance().get("Point");
+		if(pointObj != null) {
+			double[] pointArr = (double[]) pointObj;
 			LatLng point = new LatLng(pointArr[0], pointArr[1]);
 			this.point = point;
 			addMarker(point, "Current Point", BitmapDescriptorFactory.HUE_RED);
@@ -50,9 +48,11 @@ public class SelectPointActivity extends MapActivity implements PointRequestor {
 	@Override
 	public void onClick(LatLng point) {
 		
-		PointPicker picker = new PointPicker(this);
+//		PointPicker picker = new PointPicker(this);
+//		
+//		picker.pickPoint(point);
 		
-		picker.pickPoint(point);
+		pointCheck(point, true);
 	}
 	
 	public void moveToRaceSetupActivity() {
@@ -60,9 +60,12 @@ public class SelectPointActivity extends MapActivity implements PointRequestor {
 		//REPLACE MenuActivity.clss BELOW WITH CLASS YOU WANT TO GO TO
 		Intent mainActivity = new Intent(this, RaceSetupActivity.class);
 		
-		mainActivity.putExtra("Name", name);
-		double[] pointArr = {point.latitude, point.longitude};
-		mainActivity.putExtra("Point", pointArr);
+		//GameController.getInstance().put("Pick", name);
+		
+		if(point != null) {
+			double[] pointArr = {point.latitude, point.longitude};
+			GameController.getInstance().put("Point", pointArr);
+		}
 		
 		map.clear();
 		point = null;
