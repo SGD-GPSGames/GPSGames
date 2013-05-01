@@ -44,7 +44,7 @@ public class RaceActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				onStart();
+				start();
 			}
 
 		});
@@ -68,7 +68,7 @@ public class RaceActivity extends Activity {
 		startActivity(mainActivity);
 	}
 	
-	public void onStart() {
+	public void start() {
 		if(on) {
 			return;
 		}

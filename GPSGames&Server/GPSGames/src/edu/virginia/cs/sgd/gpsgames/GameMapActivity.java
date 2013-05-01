@@ -14,12 +14,6 @@ public class GameMapActivity extends MapActivity {
 	Button backButton;
 	
 
-	public LatLng getCurrentLocation() {
-		Location l = map.getMyLocation();
-
-		return new LatLng(l.getLatitude(), l.getLongitude());
-	}
-
 	public void update(String msg) {
 
 		if(msg.startsWith("pos:")) {
