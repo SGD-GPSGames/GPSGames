@@ -28,7 +28,9 @@ public class RaceActivity extends Activity {
 	        @Override
 	        public void run() {
 	           updateTime();
-	           h2.postDelayed(this, 500);
+	           if(on) {
+	        	   h2.postDelayed(this, 500);
+	           }
 	        }
 	};
 	
@@ -118,6 +120,15 @@ public class RaceActivity extends Activity {
 		GameController.getInstance().sendMessage("gmessage:Race:start");
         
 		on = true;
+	}
+
+	public void processMessage(String msg) {
+		if(msg.startsWith("end:")) {
+			on = false;
+			TextView time = (TextView) findViewById(R.id.time);
+			
+			time.setText(msg.replace("end:", ""));
+		}
 	}
 
 	

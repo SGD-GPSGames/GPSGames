@@ -30,16 +30,13 @@ public class GameController {
 	
 	private LoginActivity login;
 	private MenuActivity menu;
-
+	private RaceActivity race;
+	
 	private ServiceConnection mConnection;
 
 	protected ServerConnectionService mBoundService;
 
 	protected ReaderThread thread;
-
-	protected Thread t = new Thread() {
-		
-	};
 	
 	private boolean mIsBound;
 
@@ -96,6 +93,10 @@ public class GameController {
 
 		doBindService();
 		
+	}
+	
+	public void setRaceActivity(RaceActivity raceA) {
+		race = raceA;
 	}
 	
 	void doBindService() {
@@ -185,5 +186,9 @@ public class GameController {
 		LatLng userLocation = new LatLng(location.getLatitude(),location.getLongitude());
 
 		return userLocation;
+	}
+	
+	public void raceMessage(String msg) {
+		race.processMessage(msg);
 	}
 }

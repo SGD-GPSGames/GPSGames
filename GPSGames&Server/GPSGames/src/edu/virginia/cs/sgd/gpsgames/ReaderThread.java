@@ -31,9 +31,12 @@ public class ReaderThread implements Runnable {
 						GameController.getInstance().populateGames(action.replace("games,", ""));
 					}
 				}
+				if(message.startsWith("race:")) {
+					GameController.getInstance().raceMessage(message.replace("race:", ""));
+				}
 			}
 			
-			
+		
 		}
 
 	}

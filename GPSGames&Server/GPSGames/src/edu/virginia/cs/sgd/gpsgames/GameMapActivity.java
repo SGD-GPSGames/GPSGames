@@ -52,7 +52,7 @@ public class GameMapActivity extends MapActivity {
 		//start button -> timer
 
 
-		back = getIntent().getExtras().getString("Back");
+		back = (String) GameController.getInstance().get("Back");
 		backButton = (Button) findViewById(R.id.back);
 
 		backButton.setOnClickListener(new OnClickListener() {

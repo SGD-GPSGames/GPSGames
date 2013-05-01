@@ -48,8 +48,4 @@ public abstract class Player {
 		msg = msg.substring(0, msg.length()-1);
 	}
 	
-	public void message(String msg) {
-		
-	}
-	
 }

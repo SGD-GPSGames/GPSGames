@@ -43,7 +43,12 @@ public class Race extends Game<RacePlayer> {
 			player.setRacing(false);
 			player.stop();
 			
-			player.message("Your Time: "+(int)player.getTime()+"s.");
+			for(UserThread user : userThreads) {
+				if(user.getUser().getName().equals(player.getName())) {
+					user.writeMessage("race:end:Your Time: "+(int)player.getTime()+"s.");
+				}
+			}
+			
 		}
 	}
 
@@ -54,9 +59,13 @@ public class Race extends Game<RacePlayer> {
 
 	@Override
 	public void processMessage(GameMessage g) {
-		for(RacePlayer p : players) {
-			if(p.getName().equals(g.getUser().getName())) {
-				p.setReady(true);
+		super.processMessage(g);
+		
+		if(g.getMessage().equals("gmessage:Race:start")) {
+			for(RacePlayer p : players) {
+				if(p.getName().equals(g.getUser().getName())) {
+					p.setReady(true);
+				}
 			}
 		}
 	}
@@ -100,4 +109,5 @@ public class Race extends Game<RacePlayer> {
 		
 		timeCheck(time);
 	}
+	
 }
