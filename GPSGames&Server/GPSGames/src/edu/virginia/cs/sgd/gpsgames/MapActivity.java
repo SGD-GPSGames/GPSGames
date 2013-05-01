@@ -30,17 +30,6 @@ public abstract class MapActivity extends Activity {
 	protected MapView mapView;
 	protected GoogleMap map;
 	
-	public LatLng getCurrentLocation() {
-		
-		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
-		Criteria criteria = new Criteria();
-		String provider = service.getBestProvider(criteria, false);
-		Location location = service.getLastKnownLocation(provider);
-		LatLng userLocation = new LatLng(location.getLatitude(),location.getLongitude());
-
-		return userLocation;
-	}
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -73,7 +62,7 @@ public abstract class MapActivity extends Activity {
 		map.moveCamera(CameraUpdateFactory.zoomTo(20));
 		map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 		
-		map.moveCamera(CameraUpdateFactory.newLatLng(getCurrentLocation()));
+		map.moveCamera(CameraUpdateFactory.newLatLng(GameController.getInstance().getCurrentLocation()));
 		
 		setUpUI();
 	}

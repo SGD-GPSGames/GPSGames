@@ -13,4 +13,10 @@ public class ChatGame extends Game {
 		String text = g.getUser().getName()+","+g.getMessage();
 		sendToAllButHost(text);
 	}
+
+	@Override
+	public void addPlayer(String name) {
+		// TODO Auto-generated method stub
+		
+	}
 }

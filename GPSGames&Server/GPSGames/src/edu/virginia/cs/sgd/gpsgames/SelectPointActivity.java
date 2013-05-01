@@ -34,13 +34,11 @@ public class SelectPointActivity extends MapActivity implements PointRequestor {
 			
 		});
 
-		Bundle ex = getIntent().getExtras();
-		String str = ex.getString("edu.virginia.cs.sgd.gpsgames.Name");
+		//name = (String) GameController.getInstance().get("Pick");
 		
-		name = (str == null ? "" : str);
-		
-		double[] pointArr = ex.getDoubleArray("edu.virginia.cs.sgd.gpsgames.Point");
-		if(point != null && pointArr != null) {
+		Object pointObj = GameController.getInstance().get("Point");
+		if(pointObj != null) {
+			double[] pointArr = (double[]) pointObj;
 			LatLng point = new LatLng(pointArr[0], pointArr[1]);
 			this.point = point;
 			addMarker(point, "Current Point", BitmapDescriptorFactory.HUE_RED);
@@ -60,9 +58,12 @@ public class SelectPointActivity extends MapActivity implements PointRequestor {
 		//REPLACE MenuActivity.clss BELOW WITH CLASS YOU WANT TO GO TO
 		Intent mainActivity = new Intent(this, RaceSetupActivity.class);
 		
-		mainActivity.putExtra("edu.virginia.cs.sgd.gpsgames.Name", name);
-		double[] pointArr = {point.latitude, point.longitude};
-		mainActivity.putExtra("edu.virginia.cs.sgd.gpsgames.Point", pointArr);
+		//GameController.getInstance().put("Pick", name);
+		
+		if(point != null) {
+			double[] pointArr = {point.latitude, point.longitude};
+			GameController.getInstance().put("Point", pointArr);
+		}
 		
 		map.clear();
 		point = null;

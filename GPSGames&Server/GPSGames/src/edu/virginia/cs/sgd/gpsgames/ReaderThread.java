@@ -32,6 +32,8 @@ public class ReaderThread implements Runnable {
 					}
 				}
 			}
+			
+			
 		}
 
 	}

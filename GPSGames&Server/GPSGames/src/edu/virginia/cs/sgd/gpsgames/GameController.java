@@ -1,15 +1,24 @@
 package edu.virginia.cs.sgd.gpsgames;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import android.app.Activity;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.google.android.gms.maps.model.LatLng;
+
 import edu.virginia.cs.sgd.gpsgames.connection.Connection;
 import edu.virginia.cs.sgd.gpsgames.util.Util;
 
@@ -28,9 +37,14 @@ public class GameController {
 
 	protected ReaderThread thread;
 
+	protected Thread t = new Thread() {
+		
+	};
+	
 	private boolean mIsBound;
 
 	private Handler ui = new Handler();
+	private Map<String, Object> map = new HashMap<String, Object>();
 	
 	private boolean loggedIn = false;
 
@@ -40,7 +54,6 @@ public class GameController {
 		}
 		return instance;
 	}
-	
 	
 	private GameController() {
 		loggedIn = false;
@@ -162,5 +175,25 @@ public class GameController {
 		});
 	}
 	
+	public void put(String key, Object value) {
+		if(map.containsKey(key)) {
+			map.remove(key);
+		}
+		map.put(key, value);
+	}
 	
+	public Object get(String key) {
+		return map.get(key);
+	}
+	
+	public LatLng getCurrentLocation() {
+		
+		LocationManager service = (LocationManager) login.getSystemService(Context.LOCATION_SERVICE);
+		Criteria criteria = new Criteria();
+		String provider = service.getBestProvider(criteria, false);
+		Location location = service.getLastKnownLocation(provider);
+		LatLng userLocation = new LatLng(location.getLatitude(),location.getLongitude());
+
+		return userLocation;
+	}
 }

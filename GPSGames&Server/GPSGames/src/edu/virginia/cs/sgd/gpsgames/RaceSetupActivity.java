@@ -35,7 +35,7 @@ public class RaceSetupActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				pickStart();
+				pickEnd();
 			}
 		});
 		
@@ -43,7 +43,7 @@ public class RaceSetupActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				pickEnd();
+				pickStart();
 			}
 		});
 		
@@ -80,11 +80,11 @@ public class RaceSetupActivity extends Activity {
 	public void moveToSelectActivity(String name, LatLng startingPoint) {
 		//REPLACE MenuActivity.clss BELOW WITH CLASS YOU WANT TO GO TO
 		Intent mainActivity = new Intent(this, SelectPointActivity.class);
-		mainActivity.putExtra("Name", name);
+		GameController.getInstance().put("Pick", name);
 		
 		if(startingPoint != null) {
 			double[] pointArr = {startingPoint.latitude, startingPoint.longitude};
-			mainActivity.putExtra("Point", pointArr);
+			GameController.getInstance().put("Point", pointArr);
 		}
 		startActivity(mainActivity);
 	}
@@ -98,23 +98,19 @@ public class RaceSetupActivity extends Activity {
 	}
 
 	private void getPoints() {
-		Bundle ex = getIntent().getExtras();
 		
+		Object n = GameController.getInstance().get("Pick");
 		
-		String name = (ex == null ? null : ex.getString("edu.virginia.cs.sgd.gpsgames.Name"));
+		String name = n == null ? "" : (String) n;
 		
-		if(name == null) {
-			name = "";
-			//return;
-		}
-		//else
 		GameController.getInstance().sendMessage("Name: " + name);
-			if(name.equals("Start")) {
-			double[] coords = ex.getDoubleArray("edu.virginia.cs.sgd.gpsgames.Point");
+		
+		if(name.equals("Start")) {
+			double[] coords = (double[]) GameController.getInstance().get("Point");
 			start = new LatLng(coords[0], coords[1]);
 		}
 		else if(name.equals("End")) {
-			double[] coords = ex.getDoubleArray("edu.virginia.cs.sgd.gpsgames.Point");
+			double[] coords = (double[]) GameController.getInstance().get("Point");
 			end = new LatLng(coords[0], coords[1]);
 		}
 		else {
@@ -127,7 +123,7 @@ public class RaceSetupActivity extends Activity {
 		EditText txt = (EditText) findViewById(R.id.title);
 		
 		String title = txt.getText().toString();
-		
+
 		return title;
 	}
 	

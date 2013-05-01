@@ -55,7 +55,7 @@ public class LoginActivity extends FragmentActivity {
 			}
 		});
 		
-
+		
 	}
 	
 	public void moveToMenuActivity() {

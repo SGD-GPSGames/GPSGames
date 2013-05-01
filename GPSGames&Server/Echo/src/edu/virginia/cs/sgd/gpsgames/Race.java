@@ -39,7 +39,7 @@ public class Race extends Game<RacePlayer> {
 
 	@Override
 	public void onCollision(RacePlayer player, Point point) {
-		if(point == start) {
+		if(point == start && player.isReady() && !player.isRacing()) {
 			player.setRacing(true);
 			player.start();
 		}
@@ -58,7 +58,11 @@ public class Race extends Game<RacePlayer> {
 
 	@Override
 	public void processMessage(GameMessage g) {
-		
+		for(RacePlayer p : players) {
+			if(p.getName().equals(g.getUser().getName())) {
+				p.setReady(true);
+			}
+		}
 	}
 	
 	public int timeCompare(int[] time1, int[] time2) {
@@ -85,6 +89,14 @@ public class Race extends Game<RacePlayer> {
 			setOn(false);
 			tt.stopThread();
 		}
+		
+		checkCollision();
+	}
+
+	@Override
+	public void addPlayer(String name) {
+		
+		super.addPlayer(new RacePlayer(name, this));
 		
 	}
 	

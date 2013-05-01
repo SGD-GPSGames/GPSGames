@@ -26,10 +26,10 @@ public abstract class Game<P extends Player> extends com.thinkijustwon.nosockroc
 	private boolean on;
 	
 	// List of players in game
-	private ArrayList<P> players;
+	protected ArrayList<P> players;
 	
 	// Other points
-	private ArrayList<Point> otherPoints;
+	protected ArrayList<Point> otherPoints;
 
 	/**
 	 * Constructor. Sets the tolerance and instantiates map.

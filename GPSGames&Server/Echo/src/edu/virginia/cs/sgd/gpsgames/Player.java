@@ -8,6 +8,12 @@ public abstract class Player {
 	private Point point;
 	private Game<?> g;
 	
+	public Player(String name, Game<?> g) {
+		super();
+		this.name = name;
+		this.g = g;
+	}
+
 	public String getName() {
 		return name;
 	}

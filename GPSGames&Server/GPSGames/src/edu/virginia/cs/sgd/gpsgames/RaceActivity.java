@@ -81,7 +81,7 @@ public class RaceActivity extends Activity {
 	public void moveToGameMapActivity() {
 		//REPLACE MenuActivity.clss BELOW WITH CLASS YOU WANT TO GO TO
 		Intent mainActivity = new Intent(this, GameMapActivity.class);
-		mainActivity.putExtra("Back", "Race");
+		GameController.getInstance().put("Back", "Race");
 		startActivity(mainActivity);
 	}
 	
@@ -92,7 +92,8 @@ public class RaceActivity extends Activity {
 		
 		baseTime = System.nanoTime();
         h2.postDelayed(run, 0);
-		
+		GameController.getInstance().sendMessage("gmessage:Race:start");
+        
 		on = true;
 	}
 
