@@ -31,6 +31,8 @@ public class GameController {
 	private boolean mIsBound;
 
 	private Handler ui = new Handler();
+	
+	private boolean loggedIn = false;
 
 	public static GameController getInstance() {
 		if(instance == null) {
@@ -41,7 +43,7 @@ public class GameController {
 	
 	
 	private GameController() {
-		
+		loggedIn = false;
 	}
 	
 	public void setLoginActivity(final LoginActivity login) {
@@ -104,10 +106,18 @@ public class GameController {
 	}
 	
 	public void sendLogin(String user, String pass){
-		sendMessage("login:" + user + "," + pass);
+		if (!loggedIn){
+			sendMessage("login:" + user + "," + pass);
+		}
+		else
+		{
+			Toast.makeText(login, "Already logged in", Toast.LENGTH_SHORT);
+			loggedIn();
+		}
 	}
 	
 	public void loggedIn(){
+		loggedIn = true;
 		login.moveToMenuActivity();
 	}
 
