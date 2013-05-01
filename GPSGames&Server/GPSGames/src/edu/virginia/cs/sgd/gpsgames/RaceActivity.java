@@ -2,6 +2,7 @@ package edu.virginia.cs.sgd.gpsgames;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -34,6 +35,8 @@ public class RaceActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
+		this.setRequestedOrientation(
+				ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		getMenuInflater().inflate(R.menu.race, menu);
 		return true;
 	}

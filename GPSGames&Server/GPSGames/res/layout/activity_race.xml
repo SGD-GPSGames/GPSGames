@@ -33,7 +33,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:gravity="center_vertical"
-        android:text="@string/hello_world"
+        android:text="@string/timer_title"
         android:textSize="40sp" />
     
     <Button
