@@ -27,6 +27,8 @@ public class RaceActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		this.setRequestedOrientation(
+				ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); 
 		setContentView(R.layout.activity_race);
 		
 		on = false;
@@ -36,7 +38,7 @@ public class RaceActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		this.setRequestedOrientation(
-				ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+				ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); 
 		getMenuInflater().inflate(R.menu.race, menu);
 		return true;
 	}
