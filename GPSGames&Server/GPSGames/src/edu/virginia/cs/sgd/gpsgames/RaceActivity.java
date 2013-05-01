@@ -13,6 +13,7 @@ public class RaceActivity extends Activity {
 
 	Button startButton;
 	Button mapButton;
+	Button returnButton;
 	
 	private boolean on;
 	private long baseTime;
@@ -59,10 +60,27 @@ public class RaceActivity extends Activity {
 			}
 
 		});
+		
+		returnButton = (Button) findViewById(R.id.returnbutton);
+		
+		returnButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				moveToMenuActivity();
+			}
+
+		});
+		
+		
+	}
+
+	public void moveToMenuActivity(){
+		Intent menuActivity = new Intent(this, MenuActivity.class);
+		startActivity(menuActivity);
 	}
 
 	public void moveToGameMapActivity() {
-		//REPLACE MenuActivity.clss BELOW WITH CLASS YOU WANT TO GO TO
 		Intent mainActivity = new Intent(this, GameMapActivity.class);
 		mainActivity.putExtra("Back", "Race");
 		startActivity(mainActivity);

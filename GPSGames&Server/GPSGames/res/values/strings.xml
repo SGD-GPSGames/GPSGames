@@ -24,5 +24,7 @@
     <string name="start_button">Start</string>
     <string name="map_button">Show Map</string>
     <string name="back_button">Back</string>
+    <string name="return_button">Return</string>
+    <string name="timer_title">Time</string>
 
 </resources>
