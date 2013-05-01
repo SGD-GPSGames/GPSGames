@@ -57,6 +57,7 @@ public class GameManager {
 			LatLng end = new LatLng(Double.parseDouble(endStr[0]), Double.parseDouble(endStr[1]));
 			
 			g = new Race(userThread,CUR_GAME_ID, gameType, name, startTime, endTime, start, end);
+			System.out.println("new RaceGame created.");
 		}
 		else if(gameType.equals("Treasure")) {
 			
