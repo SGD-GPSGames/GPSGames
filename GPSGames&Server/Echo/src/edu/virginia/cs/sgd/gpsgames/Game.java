@@ -179,4 +179,8 @@ public abstract class Game<P extends Player> extends com.thinkijustwon.nosockroc
 	 */
 	public abstract void applyPowerup(P player, Powerup p);
 	
+	public String toString() {
+		return getID() + "," + gameType +"," + name + ";";
+	}
+	
 }

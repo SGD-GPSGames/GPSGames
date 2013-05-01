@@ -7,21 +7,29 @@ import com.thinkijustwon.nosockrocks.user.UserThread;
 
 public class Race extends Game<RacePlayer> {
 
-	//private TimeThread tt;
-	private String startTime;
-	private String endTime;
+
+	private TimeThread tt;
+	private int[] startTime;
+	private int[] endTime;
+
 	
 	private Point start;
 	private Point end;
 	
-	public Race(UserThread creator, int gameID, String gameType, String name, LatLng start, LatLng end) {
+	public Race(UserThread creator, int gameID, String gameType, String name, int[] startTime, int[] endTime, LatLng start, LatLng end) {
 		super(creator, gameID, gameType, name);
 
+		this.startTime = startTime;
+		this.endTime = endTime;
+		
 		this.start = new Point(start, "Start", BitmapDescriptorFactory.HUE_BLUE);
 		this.end = new Point(end, "End", BitmapDescriptorFactory.HUE_BLUE);
 
 		addPoint(this.start);
 		addPoint(this.end);
+		
+		tt = new TimeThread(this);
+		tt.start();
 	}
 	
 	@Override
@@ -52,4 +60,32 @@ public class Race extends Game<RacePlayer> {
 	public void processMessage(GameMessage g) {
 		
 	}
+	
+	public int timeCompare(int[] time1, int[] time2) {
+		
+		for(int i = 0; i < time1.length; i++) {
+			if(time1[i] > time2[i]) {
+				return -1;
+			}
+			else if (time1[i] < time2[i]) {
+				return 1;
+			}
+		}
+		
+		return 0;
+	}
+	
+	public void timeCheck(int[] time) {
+		
+		if(timeCompare(time, startTime) > -1) {
+			setOn(true);
+		}
+		
+		if(timeCompare(time, endTime) < 1) {
+			setOn(false);
+			tt.stopThread();
+		}
+		
+	}
+	
 }
